@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diagnóstico de Impacto da Reforma Tributária • 3C CONTABILIDADE</title>
+  <meta name="description" content="7 perguntas • 2 minutos • resultado na hora. Descubra o impacto da Reforma Tributária no seu negócio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="brand">
+      <div class="brand__left">
+        <img src="logo.png" alt="3C CONTABILIDADE" class="brand__logo" onerror="this.style.display='none'" />
+        <div class="brand__text">
+          <strong>3C CONTABILIDADE</strong>
+          <span>Diretor: Luis Poleis • WhatsApp: (67) 99276-9991</span>
+        </div>
+      </div>
+      <div class="brand__right">
+        <a class="btn btn--whatsapp" href="https://wa.me/5567992769991" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+    </header>
+
+    <main id="wizard" class="wizard">
+      <!-- Progress bar -->
+      <div class="progress">
+        <div id="progressBar" class="progress__bar" style="width:0%"></div>
+      </div>
+
+      <!-- Step: Cover -->
+      <section class="step active" data-step="0">
+        <h1>Descubra o impacto da Reforma Tributária no seu negócio</h1>
+        <p class="subtitle">7 perguntas • 2 minutos • resultado na hora</p>
+        <p class="desc">A 3C CONTABILIDADE preparou um diagnóstico rápido para estimar como a Reforma Tributária pode afetar sua carga tributária e processos. No final, você recebe seu Índice de Impacto e recomendações práticas.</p>
+        <ul class="bullets">
+          <li>✅ Rápido e gratuito</li>
+          <li>📊 Índice de Impacto (0 a 100)</li>
+          <li>🤝 Suporte especializado 3C CONTABILIDADE</li>
+        </ul>
+        <p class="note">LGPD: Usaremos seus dados apenas para enviar o resultado e contato sobre este diagnóstico. Não compartilhamos com terceiros.</p>
+        <div class="actions">
+          <button class="btn btn--primary" data-action="next">Começar agora</button>
+        </div>
+      </section>
+
+      <!-- Q1 -->
+      <section class="step" data-step="1">
+        <h2>Q1 🧾 Qual é o regime tributário atual da empresa?</h2>
+        <div class="options" data-question="Q1">
+          <button class="option" data-value="10">MEI</button>
+          <button class="option" data-value="30">Simples Nacional</button>
+          <button class="option" data-value="70">Lucro Presumido</button>
+          <button class="option" data-value="55">Lucro Real</button>
+        </div>
+      </section>
+
+      <!-- Q2 -->
+      <section class="step" data-step="2">
+        <h2>Q2 🧭 Setor principal (CNAE macro)</h2>
+        <div class="options" data-question="Q2">
+          <button class="option" data-value="90">Serviços com baixo uso de insumos</button>
+          <button class="option" data-value="60">Serviços com alto uso de insumos</button>
+          <button class="option" data-value="55">Comércio</button>
+          <button class="option" data-value="45">Indústria/Transformação</button>
+          <button class="option" data-value="65">Construção civil</button>
+          <button class="option" data-value="55">Agro/Logística</button>
+        </div>
+      </section>
+
+      <!-- Q3 -->
+      <section class="step" data-step="3">
+        <h2>Q3 🧱 Percentual dos seus custos/despesas com direito a crédito (insumos/serviços)</h2>
+        <div class="options" data-question="Q3">
+          <button class="option" data-value="100">0–10%</button>
+          <button class="option" data-value="75">10–25%</button>
+          <button class="option" data-value="45">25–50%</button>
+          <button class="option" data-value="20">&gt;50%</button>
+        </div>
+      </section>
+
+      <!-- Q4 -->
+      <section class="step" data-step="4">
+        <h2>Q4 🗺️ Vendas para outros estados/municípios (inclui e-commerce/marketplace)</h2>
+        <div class="options" data-question="Q4">
+          <button class="option" data-value="20">0–10%</button>
+          <button class="option" data-value="40">10–30%</button>
+          <button class="option" data-value="60">30–60%</button>
+          <button class="option" data-value="75">&gt;60%</button>
+        </div>
+      </section>
+
+      <!-- Q5 -->
+      <section class="step" data-step="5">
+        <h2>Q5 🎯 Usa benefícios/regimes especiais atualmente?</h2>
+        <div class="options" data-question="Q5">
+          <button class="option" data-value="20">Não</button>
+          <button class="option" data-value="60">Sim – ISS</button>
+          <button class="option" data-value="60">Sim – ICMS</button>
+          <button class="option" data-value="60">Sim – PIS/COFINS</button>
+          <button class="option" data-value="100">Mais de um</button>
+        </div>
+      </section>
+
+      <!-- Q6 -->
+      <section class="step" data-step="6">
+        <h2>Q6 👥 Perfil de clientes</h2>
+        <div class="options" data-question="Q6">
+          <button class="option" data-value="70">Maioria B2C (consumidor final)</button>
+          <button class="option" data-value="50">Misto (B2B e B2C)</button>
+          <button class="option" data-value="30">Maioria B2B (empresas com crédito)</button>
+          <button class="option" data-value="15">Exportação &gt;20% do faturamento</button>
+        </div>
+      </section>
+
+      <!-- Q7 -->
+      <section class="step" data-step="7">
+        <h2>Q7 ⚙️ Maturidade fiscal/sistemas (créditos, NF-e/NFS-e, ERP)</h2>
+        <div class="options" data-question="Q7">
+          <button class="option" data-value="15">Alta (processo sólido e automatizado)</button>
+          <button class="option" data-value="45">Média (parcialmente estruturado)</button>
+          <button class="option" data-value="70">Baixa (manual, planilhas, pouco controle)</button>
+        </div>
+      </section>
+
+      <!-- Contato (opcional) -->
+      <section class="step" data-step="8">
+        <h2>Quer receber um resumo do seu resultado?</h2>
+        <p>Opcional — preencha se quiser receber contato sobre este diagnóstico.</p>
+        <form id="contactForm" class="form">
+          <label>
+            Nome
+            <input type="text" name="nome" placeholder="Seu nome" />
+          </label>
+          <label>
+            WhatsApp
+            <input type="tel" name="whatsapp" inputmode="tel" placeholder="Ex.: 67 99276-9991" />
+          </label>
+          <label>
+            E-mail
+            <input type="email" name="email" placeholder="voce@empresa.com" />
+          </label>
+        </form>
+        <p class="note">Ao enviar, você autoriza contato da 3C CONTABILIDADE sobre este diagnóstico.</p>
+        <div class="actions">
+          <button class="btn" data-action="prev">Voltar</button>
+          <button class="btn btn--primary" data-action="next">Ver resultado</button>
+        </div>
+      </section>
+
+      <!-- Result: Alto impacto -->
+      <section class="step" data-step="9" data-result="alto">
+        <h2>🔥 Alto impacto: atenção imediata</h2>
+        <p class="subtitle">Seu Índice de Impacto: <span id="scoreAlto">0</span>/100</p>
+        <div id="breakdownAlto" class="breakdown"></div>
+        <ul class="bullets">
+          <li>Simulações de carga CBS/IBS por produto/serviço</li>
+          <li>Revisão de benefícios/regimes especiais</li>
+          <li>Mapeamento de créditos e ajustes de preços</li>
+          <li>Checagem de sistemas (NFS-e padrão nacional, ERP, apuração)</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn--cta" id="whatsAlto" target="_blank" rel="noopener">Falar no WhatsApp agora</a>
+          <a class="btn" href="tel:+5567992769991">Ligar para a 3C CONTABILIDADE</a>
+        </div>
+        <p class="note">Diretor: Luis Poleis • 3C CONTABILIDADE</p>
+      </section>
+
+      <!-- Result: Médio impacto -->
+      <section class="step" data-step="10" data-result="medio">
+        <h2>⚖️ Impacto moderado: oportunidade de otimização</h2>
+        <p class="subtitle">Seu Índice de Impacto: <span id="scoreMedio">0</span>/100</p>
+        <div id="breakdownMedio" class="breakdown"></div>
+        <ul class="bullets">
+          <li>Revisão da cadeia de insumos e contratos</li>
+          <li>Otimização de crédito nas compras</li>
+          <li>Ajustes de faturamento para tributação no destino</li>
+          <li>Cronograma de transição e treinamento do time</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn--primary" id="whatsMedio" target="_blank" rel="noopener">Quero um diagnóstico detalhado</a>
+          <a class="btn" id="mailtoMedio">Receber checklist por e-mail</a>
+        </div>
+        <p class="note">3C CONTABILIDADE • WhatsApp: (67) 99276-9991</p>
+      </section>
+
+      <!-- Result: Baixo impacto -->
+      <section class="step" data-step="11" data-result="baixo">
+        <h2>🟢 Baixo impacto: mantenha o controle</h2>
+        <p class="subtitle">Seu Índice de Impacto: <span id="scoreBaixo">0</span>/100</p>
+        <div id="breakdownBaixo" class="breakdown"></div>
+        <ul class="bullets">
+          <li>Conferência de cadastros fiscais e NFS-e padronizada</li>
+          <li>Monitorar regras de transição e notas técnicas</li>
+          <li>Revisar oportunidades de crédito sem aumentar risco</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn--primary" id="whatsBaixo" target="_blank" rel="noopener">Tirar dúvidas rápidas no WhatsApp</a>
+          <a class="btn" href="tel:+5567992769991">Agendar uma conversa</a>
+        </div>
+      </section>
+
+      <!-- Footer controls -->
+      <div class="footer-controls">
+        <button class="btn" data-action="prev">Voltar</button>
+        <button class="btn btn--primary" data-action="next">Próximo</button>
+      </div>
+    </main>
+
+    <!-- Admin bar (visível só com ?admin=1) -->
+    <div id="adminBar" class="adminbar" style="display:none">
+      <button class="btn" id="exportCsvBtn">Exportar resultados (CSV)</button>
+    </div>
+
+    <footer class="footer">
+      <span>© 3C CONTABILIDADE • Índice de Impacto da Reforma Tributária</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
