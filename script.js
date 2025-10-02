@@ -286,9 +286,7 @@
     btn.addEventListener('click',()=>selectOption(btn));
   });
 
-  // Footer buttons
-  footerNext.addEventListener('click', nextStep);
-  footerPrev.addEventListener('click', prevStep);
+  // Footer buttons: não adicionar listeners duplicados; usaremos apenas os genéricos abaixo
 
   // In-step "next" buttons
   document.querySelectorAll('[data-action="next"]').forEach(b=>{
