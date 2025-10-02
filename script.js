@@ -10,6 +10,7 @@
   let current = 0; // step index
   const URL_PARAMS = new URLSearchParams(window.location.search);
   const DEBUG = URL_PARAMS.get('debug') === '1';
+  let submissionSent = false; // evita envios duplicados por submissão
 
   // Pesos calibrados (soma = 1):
   // Q1 Regime (20%), Q2 Setor (20%), Q3 Créditos (15%), Q4 Destino (15%),
@@ -166,6 +167,7 @@
 
   // Persistência de submissões
   function persistSubmission({ score, details, resultClass }){
+    if (submissionSent) { if(DEBUG){ console.log('[ENVIO] Ignorado: submissão já enviada'); } return; }
     const params = new URLSearchParams(window.location.search);
     const utm = {
       utm_source: params.get('utm_source')||'',
@@ -199,6 +201,7 @@
       localStorage.setItem(key, JSON.stringify(list));
       // Envio opcional para endpoint externo
       postToEndpoint(endpointPayload);
+      submissionSent = true;
     }catch(e){
       console.warn('Falha ao salvar localmente', e);
     }
@@ -265,16 +268,17 @@
       const doFetch = () => fetch(url, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body });
       await doFetch();
       if(DEBUG){ console.log('[ENVIO] Disparado com fetch no-cors'); }
-    }catch(e){ console.warn('Falha ao enviar ao endpoint', e); }
-
-    // Fallback opcional com sendBeacon se disponível (não bloqueia navegação)
-    try{
-      if(navigator.sendBeacon && window.RESPONDER_ENDPOINT){
-        const blob = new Blob([JSON.stringify(payload)], { type: 'text/plain;charset=utf-8' });
-        const ok = navigator.sendBeacon(window.RESPONDER_ENDPOINT, blob);
-        if(DEBUG){ console.log('[ENVIO] Fallback sendBeacon result:', ok); }
-      }
-    }catch(err){ if(DEBUG){ console.warn('[ENVIO] sendBeacon falhou', err); } }
+    }catch(e){
+      console.warn('Falha ao enviar ao endpoint (fetch)', e);
+      // Fallback opcional com sendBeacon somente se fetch falhar
+      try{
+        if(navigator.sendBeacon && window.RESPONDER_ENDPOINT){
+          const blob = new Blob([JSON.stringify(payload)], { type: 'text/plain;charset=utf-8' });
+          const ok = navigator.sendBeacon(window.RESPONDER_ENDPOINT, blob);
+          if(DEBUG){ console.log('[ENVIO] Fallback sendBeacon result:', ok); }
+        }
+      }catch(err){ if(DEBUG){ console.warn('[ENVIO] sendBeacon falhou', err); } }
+    }
   }
 
   // Wire options
