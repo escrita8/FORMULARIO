@@ -8,6 +8,8 @@
 
   const answers = { Q1:null,Q2:null,Q3:null,Q4:null,Q5:null,Q6:null,Q7:null };
   let current = 0; // step index
+  const URL_PARAMS = new URLSearchParams(window.location.search);
+  const DEBUG = URL_PARAMS.get('debug') === '1';
 
   // Pesos calibrados (soma = 1):
   // Q1 Regime (20%), Q2 Setor (20%), Q3 Créditos (15%), Q4 Destino (15%),
@@ -256,9 +258,23 @@
       if(!url) return; // não configurado
       // Para reduzir preflight em Apps Script, usar no-cors + text/plain
       const body = JSON.stringify(payload);
+      if(DEBUG){
+        console.log('[ENVIO] Endpoint:', url);
+        console.log('[ENVIO] Payload mínimo:', payload);
+      }
       const doFetch = () => fetch(url, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body });
       await doFetch();
+      if(DEBUG){ console.log('[ENVIO] Disparado com fetch no-cors'); }
     }catch(e){ console.warn('Falha ao enviar ao endpoint', e); }
+
+    // Fallback opcional com sendBeacon se disponível (não bloqueia navegação)
+    try{
+      if(navigator.sendBeacon && window.RESPONDER_ENDPOINT){
+        const blob = new Blob([JSON.stringify(payload)], { type: 'text/plain;charset=utf-8' });
+        const ok = navigator.sendBeacon(window.RESPONDER_ENDPOINT, blob);
+        if(DEBUG){ console.log('[ENVIO] Fallback sendBeacon result:', ok); }
+      }
+    }catch(err){ if(DEBUG){ console.warn('[ENVIO] sendBeacon falhou', err); } }
   }
 
   // Wire options

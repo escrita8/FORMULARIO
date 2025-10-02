@@ -43,3 +43,49 @@ Você pode receber todas as respostas em um endpoint (ex.: Google Apps Script es
 ```
 
 O formulário enviará cada submissão por POST JSON para esse endereço além de salvar localmente para exportação CSV.
+
+### Google Apps Script pronto (grava apenas score final, classe de resultado e contato)
+
+Cole este código no Apps Script (Extensões > Apps Script) e publique como Web App (Acessível para "Qualquer pessoa com o link"):
+
+```javascript
+function doPost(e) {
+  try {
+    var raw = e.postData && e.postData.contents ? e.postData.contents : null;
+    if (!raw) return ContentService.createTextOutput('no body').setMimeType(ContentService.MimeType.TEXT);
+    var data = JSON.parse(raw);
+
+    // Planilha: primeira aba
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sh = ss.getSheets()[0];
+
+    // Cabeçalho esperado na linha 1:
+    // ts, score, result, nome, whatsapp, email, utm_source, utm_medium, utm_campaign
+    var row = [
+      data.ts || new Date().toISOString(),
+      data.score || '',
+      data.result || '',
+      (data.contact && data.contact.nome) || '',
+      (data.contact && data.contact.whatsapp) || '',
+      (data.contact && data.contact.email) || '',
+      (data.utm && data.utm.utm_source) || '',
+      (data.utm && data.utm.utm_medium) || '',
+      (data.utm && data.utm.utm_campaign) || ''
+    ];
+    sh.appendRow(row);
+
+    return ContentService.createTextOutput('ok').setMimeType(ContentService.MimeType.TEXT);
+  } catch (err) {
+    return ContentService.createTextOutput('error').setMimeType(ContentService.MimeType.TEXT);
+  }
+}
+```
+
+Depois de publicar, copie a URL final (termina com `/exec`) e cole no `index.html` no trecho:
+
+```html
+<script>
+  window.RESPONDER_ENDPOINT = 'https://script.google.com/macros/s/SEU_ID/exec';
+  // (remova o comentário e substitua SEU_ID pelo seu)
+</script>
+```
