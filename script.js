@@ -6,16 +6,23 @@
   const adminBar = document.getElementById('adminBar');
   const exportCsvBtn = document.getElementById('exportCsvBtn');
 
-  const answers = { Q1:null,Q2:null,Q3:null,Q4:null,Q5:null,Q6:null,Q7:null };
+  const answers = { R1:null,R2:null,Q1:null,Q2:null,Q3:null,Q4:null,Q5:null,Q6:null,Q7:null };
+  const answerLabels = { R1:null,R2:null,Q1:null,Q2:null,Q3:null,Q4:null,Q5:null,Q6:null,Q7:null };
   let current = 0; // step index
   const URL_PARAMS = new URLSearchParams(window.location.search);
   const DEBUG = URL_PARAMS.get('debug') === '1';
   let submissionSent = false; // evita envios duplicados por submissão
 
-  // Pesos calibrados (soma = 1):
-  // Q1 Regime (20%), Q2 Setor (20%), Q3 Créditos (15%), Q4 Destino (15%),
-  // Q5 Benefícios (15%), Q6 Perfil clientes (10%), Q7 Maturidade (5%)
-  const weights = { Q1:0.20,Q2:0.20,Q3:0.15,Q4:0.15,Q5:0.15,Q6:0.10,Q7:0.05 };
+  // Pesos calibrados (soma = 1) com duas novas perguntas iniciais:
+  // R1 Ramo (5%), R2 Funcionários (5%), demais reduzidos em ~10% para manter soma 1:
+  // Q1 Regime (18%), Q2 Setor (18%), Q3 Créditos (13.5%), Q4 Destino (13.5%),
+  // Q5 Benefícios (13.5%), Q6 Perfil clientes (9%), Q7 Maturidade (4.5%)
+  const weights = { R1:0.05,R2:0.05,Q1:0.18,Q2:0.18,Q3:0.135,Q4:0.135,Q5:0.135,Q6:0.09,Q7:0.045 };
+
+  function getContactIndex(){
+    const idx = steps.findIndex(s=>s.querySelector('#contactForm'));
+    return idx === -1 ? 8 : idx; // fallback
+  }
 
   function setStep(idx){
     steps.forEach(s=>s.classList.remove('active'));
@@ -24,29 +31,45 @@
   }
 
   function updateProgress(){
-    const totalQuestionSteps = 8; // 0 cover + 1..7 questions = 8 before contact
-    const percent = Math.min(((current)/(totalQuestionSteps))*100,100);
+    const contactIdx = getContactIndex();
+    const percent = Math.min(((current)/(contactIdx))*100,100);
     progressBar.style.width = percent+'%';
   }
 
   function updateFooterControls(){
     // Hide footer on results
     const isResult = steps[current]?.dataset.result;
-    document.querySelector('.footer-controls').style.display = isResult ? 'none' : 'flex';
+    const footer = document.querySelector('.footer-controls');
+    const hideFooter = (current === 0) || Boolean(isResult);
+    footer.style.display = hideFooter ? 'none' : 'flex';
     // Prev visible after cover
     footerPrev.style.display = current>0 ? 'inline-flex':'none';
 
     // Next label
+    const contactIdx = getContactIndex();
     if(current===0) footerNext.textContent = 'Começar';
-    else if(current===8) footerNext.textContent = 'Ver resultado';
+    else if(current===contactIdx) footerNext.textContent = 'Ver resultado';
     else footerNext.textContent = 'Próximo';
 
     // Disable next if current question not answered
-    if(current>=1 && current<=7){
-      const q = 'Q'+current;
-      footerNext.disabled = (answers[q]==null);
-    }else{
+    const active = steps[current];
+    const container = active?.querySelector('.options');
+    if(container){
+      const qk = container.dataset.question;
+      footerNext.disabled = (answers[qk]==null);
+    } else {
       footerNext.disabled = false;
+    }
+
+    // Se estamos no passo de contato, exigir nome/whatsapp/email
+    if(current === contactIdx){
+      const nome = (document.querySelector('input[name="nome"]').value||'').trim();
+      const whatsapp = (document.querySelector('input[name="whatsapp"]').value||'').trim();
+      const missing = !(nome && whatsapp);
+      footerNext.disabled = missing;
+      // Também desabilitar o botão "Ver resultado" dentro do passo
+      const inStepNext = active?.querySelector('[data-action="next"]');
+      if(inStepNext){ inStepNext.disabled = missing; }
     }
   }
 
@@ -57,17 +80,25 @@
     btn.classList.add('selected');
     const value = Number(btn.dataset.value);
     answers[question] = value;
+    answerLabels[question] = (btn.textContent||'').trim();
     updateFooterControls();
     // auto-next after short delay for better UX
     setTimeout(()=>nextStep(), 150);
   }
 
   function nextStep(){
-    if(current<8){
+    const contactIdx = getContactIndex();
+    if(current<contactIdx){
       setStep(current+1);
       return;
     }
-    if(current===8){
+    if(current===contactIdx){
+      // valida contato obrigatório
+      if(!validateContact()){
+        const firstErr = document.querySelector('.form input.error');
+        if(firstErr){ firstErr.focus({ preventScroll:false }); firstErr.scrollIntoView({ behavior:'smooth', block:'center' }); }
+        return;
+      }
       // compute score and show result
       const score = computeScore();
       showResult(score);
@@ -101,23 +132,29 @@
     document.getElementById('scoreBaixo').textContent = scoreInt;
 
     // Render breakdown se disponível
-    if(details && details.length){
-      const labels = {
-        Q1:'Regime tributário', Q2:'Setor (CNAE macro)', Q3:'% com crédito', Q4:'Vendas fora do estado',
-        Q5:'Benefícios/regimes especiais', Q6:'Perfil de clientes', Q7:'Maturidade fiscal/sistemas'
-      };
-      const mk = () => '<ul class="breakdown__list">' + details.map(d=>{
-        const perc = Math.round(d.value);
-        const w = Math.round(d.weight*100);
-        const c = d.contrib.toFixed(1);
-        return `<li><span>${labels[d.key]}</span><span>${perc}/100 · peso ${w}% · +${c}</span></li>`;
-      }).join('') + '</ul>';
-      const html = mk();
-      ['breakdownAlto','breakdownMedio','breakdownBaixo'].forEach(id=>{
-        const el = document.getElementById(id);
-        if(el) el.innerHTML = html;
-      });
-    }
+    // Render breakdown em duas colunas:
+    // Coluna esquerda: respostas marcadas de cada pergunta
+    // Coluna direita: apenas o score "X/100"
+    const labels = {
+      R1:'Ramo da empresa', R2:'Número de funcionários',
+      Q1:'Regime tributário', Q2:'Setor (CNAE macro)', Q3:'% com crédito', Q4:'Vendas fora do estado',
+      Q5:'Benefícios/regimes especiais', Q6:'Perfil de clientes', Q7:'Maturidade fiscal/sistemas'
+    };
+    const order = ['R1','R2','Q1','Q2','Q3','Q4','Q5','Q6','Q7'];
+    const detailsMap = Object.fromEntries((details||[]).map(d=>[d.key, d]));
+    const leftList = '<ul class="breakdown__list breakdown__list--3col">' + order.map(k=>{
+      const ans = answerLabels[k] || '-';
+      const v = detailsMap[k]?.value;
+      const imp = (typeof v === 'number') ? Math.round(v) : null;
+      const levelCls = imp!=null ? 'impact-high' : '';
+      const impText = imp!=null ? `${imp}/100` : '-';
+      return `<li><span>${labels[k]}</span><span>${ans}</span><span class="impact-val ${levelCls}">${impText}</span></li>`;
+    }).join('') + '</ul>';
+      const grid = `<div class="breakdown--grid"><div class="breakdown__col">${leftList}</div></div>`;
+    ['breakdownAlto','breakdownMedio','breakdownBaixo'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.innerHTML = grid;
+    });
 
     // Setup CTAs with prefilled text
     const nome = (document.querySelector('input[name="nome"]').value||'').trim();
@@ -176,6 +213,7 @@
     };
     const contact = {
       nome: (document.querySelector('input[name="nome"]').value||'').trim(),
+      empresa: (document.querySelector('input[name="empresa"]').value||'').trim(),
       whatsapp: (document.querySelector('input[name="whatsapp"]').value||'').trim(),
       email: (document.querySelector('input[name="email"]').value||'').trim()
     };
@@ -209,12 +247,14 @@
 
   function toCsv(items){
     const headers = [
-      'ts','score','Q1','Q2','Q3','Q4','Q5','Q6','Q7','nome','whatsapp','email','utm_source','utm_medium','utm_campaign'
+      'ts','score','R1','R2','Q1','Q2','Q3','Q4','Q5','Q6','Q7','nome','empresa','whatsapp','email','utm_source','utm_medium','utm_campaign'
     ];
     const esc = v => '"'+String(v??'').replace(/"/g,'""')+'"';
     const rows = items.map(it=>[
       it.ts,
       it.score,
+      it.answers.R1,
+      it.answers.R2,
       it.answers.Q1,
       it.answers.Q2,
       it.answers.Q3,
@@ -223,7 +263,8 @@
       it.answers.Q6,
       it.answers.Q7,
       it.contact.nome,
-      it.contact.whatsapp,
+  it.contact.empresa,
+  it.contact.whatsapp,
       it.contact.email,
       it.utm.utm_source,
       it.utm.utm_medium,
@@ -295,6 +336,29 @@
   document.querySelectorAll('[data-action="prev"]').forEach(b=>{
     b.addEventListener('click', prevStep);
   });
+
+  // Contato: listeners para remover estado de erro e reavaliar botões
+  const contactInputs = ['nome','whatsapp','email'].map(n=>document.querySelector(`input[name="${n}"]`)).filter(Boolean);
+  contactInputs.forEach(inp=>{
+    inp.addEventListener('input', ()=>{
+      inp.classList.remove('error');
+      updateFooterControls();
+    });
+  });
+
+  function validateContact(){
+    const nomeEl = document.querySelector('input[name="nome"]');
+    const whatsEl = document.querySelector('input[name="whatsapp"]');
+    const emailEl = document.querySelector('input[name="email"]');
+    const nome = (nomeEl?.value||'').trim();
+    const whatsapp = (whatsEl?.value||'').trim();
+    const email = (emailEl?.value||'').trim();
+    let ok = true;
+    if(!nome){ nomeEl?.classList.add('error'); ok = false; }
+    if(!whatsapp){ whatsEl?.classList.add('error'); ok = false; }
+    // email opcional: não marcar erro se vazio
+    return ok;
+  }
 
   // Start
   setStep(0);
