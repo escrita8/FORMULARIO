@@ -136,18 +136,19 @@
     document.getElementById('mailtoMedio').href = mailto;
 
     // Decide class
-    let targetStepIndex = null;
-  if(score>=65) targetStepIndex = steps.findIndex(s=>s.dataset.result==='alto');
-  else if(score>=40) targetStepIndex = steps.findIndex(s=>s.dataset.result==='medio');
-    else targetStepIndex = steps.findIndex(s=>s.dataset.result==='baixo');
+  let targetStepIndex = null;
+  let resultClass = 'baixo';
+  if(score>=65){ resultClass = 'alto'; targetStepIndex = steps.findIndex(s=>s.dataset.result==='alto'); }
+  else if(score>=40){ resultClass = 'medio'; targetStepIndex = steps.findIndex(s=>s.dataset.result==='medio'); }
+  else { resultClass = 'baixo'; targetStepIndex = steps.findIndex(s=>s.dataset.result==='baixo'); }
 
     setStep(targetStepIndex);
 
     // Push state UTM if present
     applyUTMs();
 
-    // Persist submission localmente
-    persistSubmission({ score: scoreInt, details });
+    // Persist submission localmente e enviar apenas payload mínimo ao endpoint
+    persistSubmission({ score: scoreInt, details, resultClass });
   }
 
   function applyUTMs(){
@@ -162,7 +163,7 @@
   }
 
   // Persistência de submissões
-  function persistSubmission({ score, details }){
+  function persistSubmission({ score, details, resultClass }){
     const params = new URLSearchParams(window.location.search);
     const utm = {
       utm_source: params.get('utm_source')||'',
@@ -182,13 +183,20 @@
       contact,
       utm
     };
+    const endpointPayload = {
+      ts: payload.ts,
+      score: payload.score,
+      result: resultClass,
+      contact,
+      utm
+    };
     try{
       const key = 'reforma_submissions_v1';
       const list = JSON.parse(localStorage.getItem(key)||'[]');
       list.push(payload);
       localStorage.setItem(key, JSON.stringify(list));
       // Envio opcional para endpoint externo
-      postToEndpoint(payload);
+      postToEndpoint(endpointPayload);
     }catch(e){
       console.warn('Falha ao salvar localmente', e);
     }
@@ -246,7 +254,10 @@
     try{
       const url = window.RESPONDER_ENDPOINT;
       if(!url) return; // não configurado
-      await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      // Para reduzir preflight em Apps Script, usar no-cors + text/plain
+      const body = JSON.stringify(payload);
+      const doFetch = () => fetch(url, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body });
+      await doFetch();
     }catch(e){ console.warn('Falha ao enviar ao endpoint', e); }
   }
 
