@@ -2,6 +2,8 @@
 
 Formulário estático (HTML/CSS/JS) pronto para ser publicado e compartilhado.
 
+- Resultado apresenta um medidor animado acompanhado de cartões explicando os principais fatores (ramo, regime, financeiro, etc.) que levaram ao score final.
+
 ## Como gerar um link rápido (sem instalar nada)
 
 Opção recomendada: Netlify Drop (drag & drop)

@@ -1,0 +1,74 @@
+
+R1 (peso 10%) — Q1 🏢 Qual é o ramo de atividade da sua empresa?
+- Venda: 60
+- Serviço: 80
+- Indústria: 30
+- Venda e Serviço: 70
+- Rural: 55
+
+R2 (peso 10%) — Q2 👥 Quantos funcionários tem na sua empresa?
+- Entre 1 a 10: 40
+- Entre 10 a 30: 50
+- Entre 30 a 50: 70
+- Entre 50 a 80: 80
+- Acima de 80: 100
+Nesse caso precisa fazer uma correlação com opção tributária, perfil de clientes e ramo de atividade!
+Se for do Simples com perfil B2C – impacto 30%
+Se for do Simples com perfil B2B + comércio  - impacto 90%
+Se for do Simples com perfil B2B + Serviço – impacto 100%
+Se for lucro real ou presumido – de qualquer forma vai ter impacto 90%
+
+R3 (peso 10%) - Q3  🏢 Qual é o faturamento anual da sua empresa?
+- Até R$ 300 Mil por ano.
+- Entre R$ 300 Mil a R$ 500 Mil por ano.
+- Entre R$ 500 Mil a R$ 1 Milhão por ano.
+- Entre R$ 1 Milhão a R$ 2 Milhões por ano.
+- Acima 2 Milhões por ano.
+
+
+Q1 (peso 10%) — Q4 🧾 Qual é o regime de tributação atual da empresa?
+- MEI: 10
+- Simples Nacional: 30
+- Lucro Presumido: 70
+- Lucro Real: 55
+As empresas mais impactadas tendem a ser o Simples Nacional e o Lucro Presumido, mas nesse caso depende da correlação com os clientes! Se for simples com perfil de clientes B2B a probabilidade de impacto deve ser bem alta, tipo 90% (Perfil de clientes + qtd de funcionários), agora se for simples com perfil de clientes B2C a probabilidade de impacto tende a ser zero!
+As empresas do Lucro Presumido terão um impacto em qualquer situação, pelo fim do pis e da cofins em 2027, principalmente se for prestador de serviço e com perfil de muitos colaboradores – probabilidade alta de migração para o Lucro Real.
+
+Q2 (peso 10%) — Q5 🧭 Você tem conhecimento do regime de tributação dos seus fornecedores?
+- A maioria é do simples nacional: 90
+- Mais regime normal (Lucro Real e/ou Lucro Presumido): 60
+- Não tenho conhecimento: 70
+- Pessoas físicas: 65
+- Não costumo pedir nota: 90
+Fornecedores PF, Simples e MEI devem ter o mesmo peso (90%), não sabe (70%) e regime normal 10%)
+Precisamos fazer a correlação com a opção tributária dos clientes no caso do simples nacional, nos casos de opção tributária pelo regime normal o impacto será maior para quem compra de simples, MEI e CPF + quem não pede nota
+
+
+Q3 (peso 10%) — Q6 👥 Qual é o perfil de clientes da sua empresa? 
+- Maioria B2C (vende para consumidor final CPF): 30
+- Misto (vendo para CNPJ e CPF): 80
+- Maioria B2B (vendo mais para empresas CNPJ): 90
+- Exportação: 30
+OBS: Exportação não vai ter impacto negativo! Não sei responder eu acho que deve ter uma impacto bem elevado em decorrência do nível de despreparo 70%! A maior nota tem que estar no B2B – 100%, Misto 80% e B2C impacto bem baixo
+Empresas do regime normal por mais que vendam para B2B ou B2C terão muito impacto no jogo dos créditos!!!!
+
+Q4 (peso 10%) — Q7 Qual é o nível de conhecimento de quem cadastra os produtos da sua empresa no sistema de vendas (Entrada de notas) em relação a: (CST, CFOP, NCM, CEST)?
+Alternativas:
+1️⃣ Não entende nada
+3️⃣ Entende razoavelmente
+4️⃣ Tem bom conhecimento
+5️⃣ Domina 100%
+6️⃣ Não sei responder
+Empresas do Simples que vendem B2B, que tem muitos funcionários e não entendem de sistemas e cadastros serão 100% impactadas!!!
+OBS: quanto menor o conhecimento maior será o impacto pela probabilidade de erro de cadastro e tributação de produtos indevidamente 
+
+Q5 (peso 10%) — Q8  Como é o financeiro da sua empresa hoje? (pode marcar mais de uma opção)
+✅ Alternativas:
+⬜️ Separo 100% as despesas pessoais das despesas da empresa
+⬜️ Peço nota fiscal de todas as compras e pagamentos realizados
+⬜️ Tenho um sistema de controle de contas a pagar e receber
+⬜️ Tenho um relatório mensal que mostra de onde vem e para onde vai o dinheiro
+⬜️ Meu financeiro ainda é muito básico: misturo contas, não peço nota e não tenho relatórios
+
+OBS: quanto menos controle maior será o impacto, pois os créditos tender a ser perdidos. 
+Em qualquer situação a falta de controles vai impactar na reforma tributária. 
