@@ -123,6 +123,13 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 .result-insights__list,
 .result-actions__list,
 .result-services__list{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.result-actions__table,
+.result-services__table{border-radius:14px;overflow:hidden;border:1px solid #e3eaf3;box-shadow:0 8px 22px rgba(15,23,42,.06)}
+.gridjs-container{--gridjs-primary-color: var(--blue-600)}
+.gridjs-container .gridjs-wrapper{border:none}
+.gridjs-th, .gridjs-td{font-size:14px}
+.gridjs-tr:hover .gridjs-td{background:#f7fbff}
+.gridjs-pagination{justify-content:flex-start}
 .result-insights__item,
 .result-actions__item,
 .result-services__item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.92);border:1px solid rgba(125,138,164,.16);box-shadow:0 8px 20px rgba(15,23,42,.05);position:relative;overflow:hidden}

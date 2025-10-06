@@ -42,7 +42,7 @@
   const ACTION_PLAN_TEMPLATES = [
     {
       category:'cadastro',
-      icon:'�️',
+      icon:'🗂️',
       title:'Recadastrar todos os itens com as regras da reforma',
       subtitle:'A 3C organiza o mutirão de saneamento fiscal e confere item a item.',
       description:'Atualize NCM, CST, CFOP, IVA e regras de destino para não perder créditos nem sofrer autuações.'
@@ -63,7 +63,7 @@
     },
     {
       category:'contabil',
-      icon:'�',
+      icon:'📚',
       title:'Garantir contabilidade estratégica para evitar impostos indevidos',
       subtitle:'Time 3C valida obrigações, acompanha legislações e ajusta o planejamento tributário.',
       description:'Cruze escrituração com cadastros e notas para recolher só o necessário e evitar autuações.'
@@ -116,7 +116,7 @@
     ],
     medio:[
       {
-        icon:'�',
+        icon:'🧰',
         title:'Kit de transição CBS/IBS',
         subtitle:'Exemplo: checklist + planilhas de simulação já configuradas',
         description:'Guiamos ajustes de cadastro, sugerimos priorização por margem e apontamos ganhos rápidos.',
@@ -150,7 +150,7 @@
         tag:'Supervisão 3C'
       },
       {
-        icon:'�',
+        icon:'🔎',
         title:'Auditoria preventiva de cadastros',
         subtitle:'Exemplo: varredura por amostragem e relatório com prioridade de correção',
         description:'Garantimos que a base continue limpa e aderente às mudanças da reforma.',
@@ -375,7 +375,7 @@
     const container = activeStep.querySelector('[data-role="actions"]');
     if(!container) return;
     container.innerHTML = '';
-    const plans = actionPlans[resultClass] || [];
+  const plans = actionPlans[resultClass] || [];
     if(!plans.length){
       const empty = document.createElement('p');
       empty.className = 'result-actions__empty';
@@ -424,6 +424,32 @@
 
       container.appendChild(item);
     });
+
+    // Monta tabela com Grid.js
+    const gridWrap = activeStep.querySelector('[data-role="actions-grid"]');
+    if(gridWrap){
+      gridWrap.innerHTML = '';
+      try{
+        const grid = new gridjs.Grid({
+          columns: [
+            { name: 'Prioridade', width: '20%' },
+            { name: 'Ação', width: '40%' },
+            { name: 'Como fazer', width: '40%' }
+          ],
+          data: plans.map(p => [p.tag || '-', p.title, p.description]),
+          pagination: { limit: 5 },
+          sort: true,
+          search: { enabled: true },
+          style: {
+            th: { 'background':'#f5f8fd', 'color':'#263238' },
+            td: { 'white-space': 'normal' }
+          }
+        });
+        grid.render(gridWrap);
+      }catch(e){
+        if(window.console) console.warn('Grid.js indisponível', e);
+      }
+    }
   }
 
   function renderServices(resultClass){
@@ -432,7 +458,7 @@
     const container = activeStep.querySelector('[data-role="services"]');
     if(!container) return;
     container.innerHTML = '';
-    const offers = serviceOffers[resultClass] || [];
+  const offers = serviceOffers[resultClass] || [];
     if(!offers.length){
       const empty = document.createElement('p');
       empty.className = 'result-services__empty';
@@ -482,6 +508,32 @@
 
       container.appendChild(item);
     });
+
+    // Monta tabela com Grid.js
+    const gridWrap = activeStep.querySelector('[data-role="services-grid"]');
+    if(gridWrap){
+      gridWrap.innerHTML = '';
+      try{
+        const grid = new gridjs.Grid({
+          columns: [
+            { name: 'Serviço 3C', width: '35%' },
+            { name: 'Exemplo', width: '35%' },
+            { name: 'Como ajudamos', width: '30%' }
+          ],
+          data: offers.map(o => [o.title, o.subtitle || '-', o.description]),
+          pagination: { limit: 5 },
+          sort: true,
+          search: { enabled: true },
+          style: {
+            th: { 'background':'#f4fbf8', 'color':'#263238' },
+            td: { 'white-space': 'normal' }
+          }
+        });
+        grid.render(gridWrap);
+      }catch(e){
+        if(window.console) console.warn('Grid.js indisponível', e);
+      }
+    }
   }
 
   const multiEvaluators = {
