@@ -70,6 +70,19 @@
     }
   ];
 
+  const CATEGORY_LABELS = {
+    cadastro:'Cadastro',
+    equipe:'Equipe',
+    financeiro:'Financeiro',
+    contabil:'Contabilidade'
+  };
+  const SERVICE_LABELS = {
+    consultoria:'Consultoria',
+    bpo:'BPO',
+    compliance:'Compliance',
+    treinamento:'Treinamento'
+  };
+
   function generateActionPlans(level){
     return ACTION_PLAN_TEMPLATES.map(item=>({
       icon:item.icon,
@@ -430,13 +443,20 @@
     if(gridWrap){
       gridWrap.innerHTML = '';
       try{
+        const rows = plans.map(p => [
+          gridjs.html(`<span class="chip chip--${p.category}">${p.icon || ''} ${CATEGORY_LABELS[p.category] || ''}</span>`),
+          gridjs.html(`<strong>${p.title}</strong>${p.subtitle ? `<br><small>${p.subtitle}</small>` : ''}`),
+          gridjs.html(`${p.description}`),
+          gridjs.html(`<span class="tag tag--${p.category}">${p.tag || '-'}</span>`)
+        ]);
         const grid = new gridjs.Grid({
           columns: [
-            { name: 'Prioridade', width: '20%' },
-            { name: 'Ação', width: '40%' },
-            { name: 'Como fazer', width: '40%' }
+            { name: 'Área', width: '18%' },
+            { name: 'Ação', width: '38%' },
+            { name: 'Como fazer', width: '34%' },
+            { name: 'Prioridade', width: '10%' }
           ],
-          data: plans.map(p => [p.tag || '-', p.title, p.description]),
+          data: rows,
           pagination: { limit: 5 },
           sort: true,
           search: { enabled: true },
@@ -514,13 +534,22 @@
     if(gridWrap){
       gridWrap.innerHTML = '';
       try{
+        const rows = offers.map(o => [
+          gridjs.html(`<span class="chip chip--${o.category}">${o.icon || ''} ${SERVICE_LABELS[o.category] || ''}</span>`),
+          gridjs.html(`<strong>${o.title}</strong>`),
+          gridjs.html(`${o.subtitle || '-'}`),
+          gridjs.html(`${o.description}`),
+          gridjs.html(`${o.tag ? `<span class='tag tag--${o.category}'>${o.tag}</span>` : '-'}`)
+        ]);
         const grid = new gridjs.Grid({
           columns: [
-            { name: 'Serviço 3C', width: '35%' },
-            { name: 'Exemplo', width: '35%' },
-            { name: 'Como ajudamos', width: '30%' }
+            { name: 'Categoria', width: '16%' },
+            { name: 'Serviço 3C', width: '28%' },
+            { name: 'Exemplo', width: '26%' },
+            { name: 'Como ajudamos', width: '20%' },
+            { name: 'Selo', width: '10%' }
           ],
-          data: offers.map(o => [o.title, o.subtitle || '-', o.description]),
+          data: rows,
           pagination: { limit: 5 },
           sort: true,
           search: { enabled: true },

@@ -130,6 +130,20 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 .gridjs-th, .gridjs-td{font-size:14px}
 .gridjs-tr:hover .gridjs-td{background:#f7fbff}
 .gridjs-pagination{justify-content:flex-start}
+
+/* Chips e tags nas tabelas */
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent}
+.chip--cadastro{background:#eef1ff;border-color:#dde2ff;color:#283593}
+.chip--equipe{background:#fff3e0;border-color:#ffe0b2;color:#ef6c00}
+.chip--financeiro{background:#e3f2fd;border-color:#bbdefb;color:#1565c0}
+.chip--contabil{background:#e8f5e9;border-color:#c8e6c9;color:#1b5e20}
+.chip .ph, .chip img, .chip svg{width:14px;height:14px}
+
+.tag{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700;border:1px dashed currentColor}
+.tag--cadastro{color:#283593;background:#eef1ff}
+.tag--equipe{color:#ef6c00;background:#fff3e0}
+.tag--financeiro{color:#1565c0;background:#e3f2fd}
+.tag--contabil{color:#1b5e20;background:#e8f5e9}
 .result-insights__item,
 .result-actions__item,
 .result-services__item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.92);border:1px solid rgba(125,138,164,.16);box-shadow:0 8px 20px rgba(15,23,42,.05);position:relative;overflow:hidden}
