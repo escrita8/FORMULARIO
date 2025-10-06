@@ -70,18 +70,6 @@
     }
   ];
 
-  const CATEGORY_LABELS = {
-    cadastro:'Cadastro',
-    equipe:'Equipe',
-    financeiro:'Financeiro',
-    contabil:'Contabilidade'
-  };
-  const SERVICE_LABELS = {
-    consultoria:'Consultoria',
-    bpo:'BPO',
-    compliance:'Compliance',
-    treinamento:'Treinamento'
-  };
 
   function generateActionPlans(level){
     return ACTION_PLAN_TEMPLATES.map(item=>({
@@ -438,38 +426,6 @@
       container.appendChild(item);
     });
 
-    // Monta tabela com Grid.js
-    const gridWrap = activeStep.querySelector('[data-role="actions-grid"]');
-    if(gridWrap){
-      gridWrap.innerHTML = '';
-      try{
-        const rows = plans.map(p => [
-          gridjs.html(`<span class="chip chip--${p.category}">${p.icon || ''} ${CATEGORY_LABELS[p.category] || ''}</span>`),
-          gridjs.html(`<strong>${p.title}</strong>${p.subtitle ? `<br><small>${p.subtitle}</small>` : ''}`),
-          gridjs.html(`${p.description}`),
-          gridjs.html(`<span class="tag tag--${p.category}">${p.tag || '-'}</span>`)
-        ]);
-        const grid = new gridjs.Grid({
-          columns: [
-            { name: 'Área', width: '18%' },
-            { name: 'Ação', width: '38%' },
-            { name: 'Como fazer', width: '34%' },
-            { name: 'Prioridade', width: '10%' }
-          ],
-          data: rows,
-          pagination: { limit: 5 },
-          sort: true,
-          search: { enabled: true },
-          style: {
-            th: { 'background':'#f5f8fd', 'color':'#263238' },
-            td: { 'white-space': 'normal' }
-          }
-        });
-        grid.render(gridWrap);
-      }catch(e){
-        if(window.console) console.warn('Grid.js indisponível', e);
-      }
-    }
   }
 
   function renderServices(resultClass){
@@ -529,40 +485,6 @@
       container.appendChild(item);
     });
 
-    // Monta tabela com Grid.js
-    const gridWrap = activeStep.querySelector('[data-role="services-grid"]');
-    if(gridWrap){
-      gridWrap.innerHTML = '';
-      try{
-        const rows = offers.map(o => [
-          gridjs.html(`<span class="chip chip--${o.category}">${o.icon || ''} ${SERVICE_LABELS[o.category] || ''}</span>`),
-          gridjs.html(`<strong>${o.title}</strong>`),
-          gridjs.html(`${o.subtitle || '-'}`),
-          gridjs.html(`${o.description}`),
-          gridjs.html(`${o.tag ? `<span class='tag tag--${o.category}'>${o.tag}</span>` : '-'}`)
-        ]);
-        const grid = new gridjs.Grid({
-          columns: [
-            { name: 'Categoria', width: '16%' },
-            { name: 'Serviço 3C', width: '28%' },
-            { name: 'Exemplo', width: '26%' },
-            { name: 'Como ajudamos', width: '20%' },
-            { name: 'Selo', width: '10%' }
-          ],
-          data: rows,
-          pagination: { limit: 5 },
-          sort: true,
-          search: { enabled: true },
-          style: {
-            th: { 'background':'#f4fbf8', 'color':'#263238' },
-            td: { 'white-space': 'normal' }
-          }
-        });
-        grid.render(gridWrap);
-      }catch(e){
-        if(window.console) console.warn('Grid.js indisponível', e);
-      }
-    }
   }
 
   const multiEvaluators = {
