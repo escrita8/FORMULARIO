@@ -47,6 +47,14 @@
     return meta?.label || '';
   }
 
+  // Empacota uma resposta (valor + rótulo legível) para envio/relatório
+  function packAnswer(key){
+    const label = formatMetaLabel(answerMeta[key]);
+    const val = answers[key];
+    const value = (val==null || Number.isNaN(Number(val))) ? '' : Number(val);
+    return { key, value, label: label || '' };
+  }
+
   function buildInsightFor(key, value){
     const level = classifyImpactLevel(value);
     const meta = answerMeta[key];
@@ -563,12 +571,28 @@
       contact,
       utm
     };
+    // Mapeia as perguntas visíveis solicitadas:
+    // Q2 (Funcionários) -> R2, Q3 (Faturamento) -> R3, Q4 (Regime) -> Q1, Q7 (Conhecimento cadastro) -> Q4
+    const Q2p = packAnswer('R2');
+    const Q3p = packAnswer('R3');
+    const Q4p = packAnswer('Q1');
+    const Q7p = packAnswer('Q4');
+
     const endpointPayload = {
       ts: payload.ts,
       score: payload.score,
       result: resultClass,
       contact,
-      utm
+      utm,
+      // Campos diretos para facilitar a criação de colunas na planilha
+      Q2_label: Q2p.label,
+      Q2_value: Q2p.value,
+      Q3_label: Q3p.label,
+      Q3_value: Q3p.value,
+      Q4_label: Q4p.label,
+      Q4_value: Q4p.value,
+      Q7_label: Q7p.label,
+      Q7_value: Q7p.value
     };
     try{
       const key = 'reforma_submissions_v1';
@@ -584,7 +608,11 @@
 
   function toCsv(items){
     const headers = [
-      'ts','score','R1','R2','R3','Q1','Q2','Q3','Q4','Q5','nome','empresa','whatsapp','email','utm_source','utm_medium','utm_campaign'
+      'ts','score',
+      'R1','R2','R3','Q1','Q2','Q3','Q4','Q5',
+      // Labels legíveis para Q2, Q3, Q4 e Q7 (pedido do cliente)
+      'Q2_resposta','Q3_resposta','Q4_resposta','Q7_resposta',
+      'nome','empresa','whatsapp','email','utm_source','utm_medium','utm_campaign'
     ];
     const esc = v => '"'+String(v??'').replace(/"/g,'""')+'"';
     const rows = items.map(item => [
@@ -598,6 +626,19 @@
   item.answers.Q3,
   item.answers.Q4,
   item.answers.Q5,
+      // Labels: mapear conforme as chaves internas
+      // Q2 (visível) -> R2
+      (item.answerMeta && (Array.isArray(item.answerMeta.R2) ? item.answerMeta.R2.map(i=>i.label).join(', ') : (item.answerMeta.R2?.label||'')))
+        || '',
+      // Q3 (visível) -> R3
+      (item.answerMeta && (Array.isArray(item.answerMeta.R3) ? item.answerMeta.R3.map(i=>i.label).join(', ') : (item.answerMeta.R3?.label||'')))
+        || '',
+      // Q4 (visível) -> Q1
+      (item.answerMeta && (Array.isArray(item.answerMeta.Q1) ? item.answerMeta.Q1.map(i=>i.label).join(', ') : (item.answerMeta.Q1?.label||'')))
+        || '',
+      // Q7 (visível) -> Q4
+      (item.answerMeta && (Array.isArray(item.answerMeta.Q4) ? item.answerMeta.Q4.map(i=>i.label).join(', ') : (item.answerMeta.Q4?.label||'')))
+        || '',
       item.contact.nome,
       item.contact.empresa,
       item.contact.whatsapp,
