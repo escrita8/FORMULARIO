@@ -51,9 +51,9 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 .option:hover{border-color:var(--blue-600);box-shadow:var(--shadow-sm);transform:translateY(-1px)}
 .option.selected{border-color:var(--blue-600);background:#e9f3fe;box-shadow:0 0 0 3px rgba(30,136,229,.12)}
 
-.form{display:grid;gap:12px;margin-top:12px}
-.form label{display:grid;gap:6px;font-size:14px}
-.form input{padding:12px 14px;border:1px solid #d7dee4;border-radius:10px;background:var(--white)}
+.form{display:grid;gap:8px;margin-top:10px}
+.form label{display:grid;gap:4px;font-size:14px}
+.form input{padding:10px 12px;border:1px solid #d7dee4;border-radius:10px;background:var(--white)}
 .form input.error{border-color:#e53935;box-shadow:0 0 0 3px rgba(229,57,53,.12)}
 .form .field-error{color:#c62828;font-size:12px;min-height:16px}
 
