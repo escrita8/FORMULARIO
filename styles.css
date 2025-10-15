@@ -110,21 +110,42 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
   font-size:18px;
   padding:24px 24px;
   border-radius:14px;
-  box-shadow:0 14px 32px rgba(22,163,74,.28), inset 0 1px 0 rgba(255,255,255,.25);
+  box-shadow:0 16px 40px rgba(22,163,74,.32), inset 0 1px 0 rgba(255,255,255,.25);
   max-width:520px;
   align-self:center;
   will-change:transform, box-shadow, background-position;
-  animation:heroPulse 2.6s ease-in-out infinite, heroGradient 6s linear infinite;
+  animation:heroPulse 2.4s ease-in-out infinite, heroGradient 5.2s linear infinite;
+}
+.btn.btn--hero::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:0 0 0 0 rgba(34,197,94,.35);
+  opacity:0;
+  animation:heroRing 2.4s ease-out infinite;
+}
+.btn.btn--hero::before{
+  content:"";
+  position:absolute;
+  top:0;left:-150%;
+  height:100%;
+  width:55%;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.42) 45%, rgba(255,255,255,0) 90%);
+  transform:skewX(-20deg);
+  pointer-events:none;
+  animation:heroShine 4.2s ease-in-out infinite;
 }
 .btn.btn--hero:hover{filter:brightness(1.02);transform:translateY(-2px);box-shadow:0 18px 40px rgba(22,163,74,.28)}
 @keyframes heroPulse{
   0%,100%{
     transform:scale(1);
-    box-shadow:0 14px 32px rgba(22,163,74,.28), inset 0 1px 0 rgba(255,255,255,.25);
+    box-shadow:0 16px 40px rgba(22,163,74,.32), inset 0 1px 0 rgba(255,255,255,.25);
   }
   50%{
-    transform:scale(1.04);
-    box-shadow:0 22px 52px rgba(22,163,74,.36), 0 0 0 10px rgba(34,197,94,.12), inset 0 1px 0 rgba(255,255,255,.25);
+    transform:scale(1.08);
+    box-shadow:0 28px 64px rgba(22,163,74,.44), 0 0 0 14px rgba(34,197,94,.16), inset 0 1px 0 rgba(255,255,255,.25);
   }
 }
 @keyframes heroGradient{
@@ -132,8 +153,20 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
+@keyframes heroRing{
+  0%{opacity:.9; box-shadow:0 0 0 0 rgba(34,197,94,.32)}
+  70%{opacity:.25; box-shadow:0 0 0 18px rgba(34,197,94,.10)}
+  100%{opacity:0; box-shadow:0 0 0 26px rgba(34,197,94,0)}
+}
+@keyframes heroShine{
+  0%{left:-150%}
+  60%{left:120%}
+  100%{left:120%}
+}
 @media (prefers-reduced-motion: reduce){
   .btn.btn--hero{animation:none}
+  .btn.btn--hero::before,
+  .btn.btn--hero::after{animation:none;opacity:0}
 }
 
 /* Vídeo no resultado */
