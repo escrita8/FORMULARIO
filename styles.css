@@ -55,6 +55,7 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 .form label{display:grid;gap:6px;font-size:14px}
 .form input{padding:12px 14px;border:1px solid #d7dee4;border-radius:10px;background:var(--white)}
 .form input.error{border-color:#e53935;box-shadow:0 0 0 3px rgba(229,57,53,.12)}
+.form .field-error{color:#c62828;font-size:12px;min-height:16px}
 
 .actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 .btn{appearance:none;border:none;border-radius:12px;padding:12px 16px;background:#e8edf2;color:#1b2630;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);transition:transform .08s ease,box-shadow .2s ease,filter .2s ease}
@@ -95,6 +96,23 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 /* Resultados: empilhar botões um abaixo do outro */
 .step[data-result] .actions{flex-direction:column;align-items:flex-start}
 .step[data-result] .actions .btn{width:100%;max-width:400px}
+.step[data-result] .actions.actions--single{align-items:stretch}
+.actions__title{margin:6px 0 10px;color:var(--gray-900);font-weight:800;letter-spacing:.2px;font-size:18px;line-height:1.25;text-align:center}
+@media (max-width:600px){
+  .actions__title{font-size:16px}
+}
+.btn.btn--hero{background:linear-gradient(180deg,#22c55e,#16a34a);color:#fff;font-size:17px;padding:18px 20px;border-radius:14px;box-shadow:0 14px 32px rgba(22,163,74,.25), inset 0 1px 0 rgba(255,255,255,.25);max-width:520px;align-self:center}
+.btn.btn--hero:hover{filter:brightness(1.02);transform:translateY(-2px);box-shadow:0 18px 40px rgba(22,163,74,.28)}
+
+/* Vídeo no resultado */
+.result-video{margin:35px 0 6px;display:flex;justify-content:flex-start}
+.result-video__frame{position:relative;width:100%;max-width:clamp(200px,50vw,320px);max-height:320px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(15,23,42,.12);background:#000;border:1px solid #e3eaf3}
+.result-video__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* Estilo para vídeo local */
+.result-video__frame .result-video__player{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000;object-fit:contain;object-position:center center}
+.result-video__fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;background:linear-gradient(180deg,#ffffff 0%,#f6f8fc 100%);color:#1b2630}
+.result-video__fallback small{display:block;color:#607D8B;margin-top:6px}
+.result-video__fallback a{color:#1565C0}
 
 /* Impact meter */
 .impact-meter{margin:12px 0 24px;padding:24px;border-radius:20px;background:linear-gradient(180deg,#ffffff 0%,#f5f8fd 100%);box-shadow:var(--shadow-md);border:1px solid #e3eaf3;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden}
@@ -247,8 +265,47 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
   .result-services__item{flex-direction:column;gap:12px}
   .result-insights__badge,
   .result-actions__badge,
-  .result-services__badge{width:36px;height:36px;font-size:18px}
+  .result-services__badge{width:40px;height:40px;font-size:20px}
   .result-insights__tag,
   .result-actions__tag,
   .result-services__tag{margin-top:6px}
+  /* Remover "Resposta:" nos insights para reduzir texto no mobile */
+  .result-insights__label{display:none}
+  /* Reduzir blocos de texto (3 linhas) para leitura rápida */
+  .result-insights__text,
+  .result-actions__text,
+  .result-services__text{
+    display:-webkit-box;
+    line-clamp:3;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    word-break:break-word;
+  }
+}
+
+/* Realce visual por nível nos insights (bordas laterais) */
+.result-insights__item{border-left:5px solid transparent}
+.result-insights__item--alto{border-left-color:#e53935}
+.result-insights__item--medio{border-left-color:#fb8c00}
+.result-insights__item--baixo{border-left-color:#2e7d32}
+/* fim */
+
+/* Unified result callout */
+.result-callout{margin:18px 0 10px;padding:22px;border-radius:18px;background:linear-gradient(180deg,rgba(246,249,255,.96) 0%,rgba(235,245,255,.94) 100%);border:1px solid rgba(118,141,220,.28);box-shadow:0 14px 36px rgba(15,23,42,.08);display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.result-callout::after{content:'';position:absolute;inset:0;border-radius:18px;background:radial-gradient(120% 80% at 80% 0%, rgba(66,165,245,.15) 0%, rgba(66,165,245,0) 70%);pointer-events:none}
+.result-callout__header{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.result-callout__badge{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(30,136,229,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.4);font-size:22px}
+.result-callout__titlewrap{display:flex;flex-direction:column;gap:4px}
+.result-callout__title{margin:0;color:var(--gray-900);font-size:18px;font-weight:800;letter-spacing:.2px}
+.result-callout__subtitle{margin:0;color:var(--gray-500);font-size:13px}
+.result-callout__list{display:grid;gap:10px;grid-template-columns:1fr}
+.result-callout__line{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.92);border:1px solid rgba(125,138,164,.16);box-shadow:0 8px 18px rgba(15,23,42,.05);font-weight:600}
+.result-callout__line--highlight{background:linear-gradient(180deg,rgba(255,255,255,.96) 0%,rgba(236,253,245,.96) 100%);border-color:rgba(16,185,129,.35);box-shadow:0 10px 24px rgba(5,150,105,.12)}
+.result-callout__icon{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:999px;background:rgba(30,136,229,.16);color:var(--blue-600);font-size:13px;line-height:1;margin-top:2px}
+/* Ícone diferenciado para itens em destaque */
+.result-callout__line--highlight .result-callout__icon{background:rgba(16,185,129,.18);color:#047857}
+
+@media (min-width:700px){
+  .result-callout__list{grid-template-columns:repeat(2,minmax(0,1fr))}
 }

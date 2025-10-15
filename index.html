@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Diagnóstico de Impacto da Reforma Tributária • 3C CONTABILIDADE</title>
-  <meta name="description" content="São 7 perguntas  •  2 minutos  •  Resultado na hora. Descubra o impacto da Reforma Tributária no seu negócio." />
+  <meta name="description" content="São 8 perguntas  •  3 minutos  •  Resultado na hora. Descubra o impacto da Reforma Tributária no seu negócio." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <!-- Grid.js para tabelas bonitonas -->
+  <link rel="stylesheet" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css">
+  <script defer src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
   <script>
     window.RESPONDER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxovH-pRx2oJR9UMvFDl-QgBvs7SQE0p2iAsTxwN0-zVOZhEdjidsVtXbqnz9ovEB21CA/exec';
   </script>
@@ -46,7 +49,7 @@
       <!-- Step: Cover -->
       <section class="step active" data-step="0">
         <h1>Descubra o impacto da Reforma Tributária</h1>
-  <p class="subtitle">São 7 perguntas  •  2 minutos  •  Resultado na hora</p>
+  <p class="subtitle">São 8 perguntas  •  3 minutos  •  Resultado na hora</p>
         <p class="desc">A 3C CONTABILIDADE preparou um diagnóstico rápido para estimar como a Reforma Tributária pode afetar sua carga tributária e processos. No final, você recebe seu Índice de Impacto e recomendações práticas, hoje contamos com cerca de 40 consultores especializados no assunto para melhor atender!</p>
         <ul class="bullets">
           <li>✅ Rápido e Gratuito</li>
@@ -159,10 +162,11 @@
       <section class="step" data-step="8">
         <h2>Preencha seus dados para ver o resultado</h2>
       
-        <form id="contactForm" class="form">
+        <form id="contactForm" class="form" novalidate>
           <label>
             Nome
             <input type="text" name="nome" placeholder="Seu nome" />
+            <small class="field-error" data-error-for="nome" aria-live="polite"></small>
           </label>
           <label>
             Nome da empresa
@@ -170,11 +174,13 @@
           </label>
           <label>
             WhatsApp
-            <input type="tel" name="whatsapp" inputmode="tel" placeholder="Ex.: 67 99698-7023" />
+            <input type="tel" name="whatsapp" inputmode="tel" placeholder="Ex.: 67 99999-9999" />
+            <small class="field-error" data-error-for="whatsapp" aria-live="polite"></small>
           </label>
             <label>
               E-mail
-              <input type="email" name="email" placeholder="voce@empresa.com" />
+              <input type="email" name="email" placeholder="exemplo@gmail.com.br" />
+              <small class="field-error" data-error-for="email" aria-live="polite"></small>
             </label>
         </form>
         <p class="note">Ao enviar, você autoriza contato da 3C CONTABILIDADE sobre este diagnóstico.</p>
@@ -197,21 +203,34 @@
             <div id="impactBarAlto" class="impact-meter__fill"></div>
           </div>
         </div>
-        <div class="result-insights">
-          <h3>Por que você chegou a este impacto</h3>
-          <div class="result-insights__list" data-role="insights"></div>
+        <div class="result-callout">
+          <div class="result-callout__header">
+            <span class="result-callout__badge">🚀</span>
+            <div class="result-callout__titlewrap">
+              <h3 class="result-callout__title">Próximos passos essenciais</h3>
+              <p class="result-callout__subtitle">Orientação prática e direta para agir agora</p>
+            </div>
+          </div>
+          <div class="result-callout__list">
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Organize seu financeiro.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Faça o planejamento tributário.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Corrija todos os cadastros dos produtos.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Entenda como pagar menos imposto.</span></div>
+            <div class="result-callout__line result-callout__line--highlight"><span class="result-callout__icon">★</span><span>Conte com a 3C Contabilidade pra fazer tudo isso do jeito certo.</span></div>
+            <div class="result-callout__line result-callout__line--highlight"><span class="result-callout__icon">★</span><span>Deixe a 3C Contabilidade te ajudar a proteger a sua empresa.</span></div>
+          </div>
         </div>
-        <div class="result-actions">
-          <h3>O que você deve fazer agora</h3>
-          <div class="result-actions__list" data-role="actions"></div>
+        <div class="actions actions--single">
+          <p class="actions__title">Quer transformar a reforma em lucro e pagar menos impostos?<br>Clique abaixo e fale com um especialista.</p>
+          <a class="btn btn--hero" id="whatsAlto" target="_blank" rel="noopener">Quero proteger minha empresa</a>
         </div>
-        <div class="result-services">
-          <h3>Como a 3C CONTABILIDADE pode ajudar</h3>
-          <div class="result-services__list" data-role="services"></div>
-        </div>
-        <div class="actions">
-          <a class="btn btn--primary" id="whatsAlto" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          <a class="btn btn--primary" href="https://www.3ccontabilidade.com.br/" target="_blank" rel="noopener">O que a 3C CONTABILIDADE Oferece</a>
+        <div class="result-video">
+          <div class="result-video__frame">
+            <video class="result-video__player" controls playsinline webkit-playsinline preload="metadata" poster="media/video-poster.jpg">
+              <source src="media/Video%20Sobre%20a%20Reforma.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5. Você pode <a href="media/Video%20Sobre%20a%20Reforma.mp4" download>baixar o vídeo em MP4</a>.
+            </video>
+          </div>
         </div>
         <p class="note">Diretor: Luis Poleis • 3C CONTABILIDADE</p>
       </section>
@@ -229,21 +248,34 @@
             <div id="impactBarMedio" class="impact-meter__fill"></div>
           </div>
         </div>
-        <div class="result-insights">
-          <h3>Por que você chegou a este impacto</h3>
-          <div class="result-insights__list" data-role="insights"></div>
+        <div class="result-callout">
+          <div class="result-callout__header">
+            <span class="result-callout__badge">🚀</span>
+            <div class="result-callout__titlewrap">
+              <h3 class="result-callout__title">Próximos passos essenciais</h3>
+              <p class="result-callout__subtitle">Orientação prática e direta para agir agora</p>
+            </div>
+          </div>
+          <div class="result-callout__list">
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Organize seu financeiro.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Faça o planejamento tributário.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Corrija todos os cadastros dos produtos.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Entenda como pagar menos imposto.</span></div>
+            <div class="result-callout__line result-callout__line--highlight"><span class="result-callout__icon">★</span><span>Conte com a 3C Contabilidade pra fazer tudo isso do jeito certo.</span></div>
+            <div class="result-callout__line result-callout__line--highlight"><span class="result-callout__icon">★</span><span>Deixe a 3C Contabilidade te ajudar a proteger a sua empresa.</span></div>
+          </div>
         </div>
-        <div class="result-actions">
-          <h3>O que você deve fazer agora</h3>
-          <div class="result-actions__list" data-role="actions"></div>
+        <div class="actions actions--single">
+          <p class="actions__title">Quer transformar a reforma em lucro e pagar menos impostos?<br>Clique abaixo e fale com um especialista.</p>
+          <a class="btn btn--hero" id="whatsMedio" target="_blank" rel="noopener">Quero proteger minha empresa</a>
         </div>
-        <div class="result-services">
-          <h3>Como a 3C CONTABILIDADE pode ajudar</h3>
-          <div class="result-services__list" data-role="services"></div>
-        </div>
-        <div class="actions">
-          <a class="btn btn--primary" id="whatsMedio" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          <a class="btn btn--primary" id="solucoes3C" href="https://www.3ccontabilidade.com.br/" target="_blank" rel="noopener">Soluções da 3C Contabilidade</a>
+        <div class="result-video">
+          <div class="result-video__frame">
+            <video class="result-video__player" controls playsinline webkit-playsinline preload="metadata" poster="media/video-poster.jpg">
+              <source src="media/Video%20Sobre%20a%20Reforma.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5. Você pode <a href="media/Video%20Sobre%20a%20Reforma.mp4" download>baixar o vídeo em MP4</a>.
+            </video>
+          </div>
         </div>
         <p class="note">3C CONTABILIDADE • WhatsApp: (67) 99698-7023</p>
       </section>
@@ -261,21 +293,34 @@
             <div id="impactBarBaixo" class="impact-meter__fill"></div>
           </div>
         </div>
-        <div class="result-insights">
-          <h3>Por que você chegou a este impacto</h3>
-          <div class="result-insights__list" data-role="insights"></div>
+        <div class="result-callout">
+          <div class="result-callout__header">
+            <span class="result-callout__badge">🚀</span>
+            <div class="result-callout__titlewrap">
+              <h3 class="result-callout__title">Próximos passos essenciais</h3>
+              <p class="result-callout__subtitle">Orientação prática e direta para agir agora</p>
+            </div>
+          </div>
+          <div class="result-callout__list">
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Organize seu financeiro.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Faça o planejamento tributário.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Corrija todos os cadastros dos produtos.</span></div>
+            <div class="result-callout__line"><span class="result-callout__icon">✓</span><span>Entenda como pagar menos imposto.</span></div>
+            <div class="result-callout__line result-callout__line--highlight"><span class="result-callout__icon">★</span><span>Conte com a 3C Contabilidade para fazer tudo isso do jeito certo.</span></div>
+            <div class="result-callout__line result-callout__line--highlight"><span class="result-callout__icon">★</span><span>Deixe a 3C Contabilidade te ajudar a proteger a sua empresa.</span></div>
+          </div>
         </div>
-        <div class="result-actions">
-          <h3>O que você deve fazer agora</h3>
-          <div class="result-actions__list" data-role="actions"></div>
+        <div class="actions actions--single">
+          <p class="actions__title">Quer transformar a reforma em lucro e pagar menos impostos?<br>Clique abaixo e fale com um especialista.</p>
+          <a class="btn btn--hero" id="whatsBaixo" target="_blank" rel="noopener">Quero proteger minha empresa</a>
         </div>
-        <div class="result-services">
-          <h3>Como a 3C CONTABILIDADE pode ajudar</h3>
-          <div class="result-services__list" data-role="services"></div>
-        </div>
-        <div class="actions">
-          <a class="btn btn--primary" id="whatsBaixo" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          <a class="btn btn--primary" href="https://www.3ccontabilidade.com.br/" target="_blank" rel="noopener">O que a 3C CONTABILIDADE oferece?</a>
+        <div class="result-video">
+          <div class="result-video__frame">
+            <video class="result-video__player" controls playsinline webkit-playsinline preload="metadata" poster="media/video-poster.jpg">
+              <source src="media/Video%20Sobre%20a%20Reforma.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5. Você pode <a href="media/Video%20Sobre%20a%20Reforma.mp4" download>baixar o vídeo em MP4</a>.
+            </video>
+          </div>
         </div>
       </section>
 

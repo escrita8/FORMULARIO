@@ -32,146 +32,11 @@
     baixo: { icon:'ℹ️', label:'Impacto baixo' }
   };
 
-  const ACTION_PRIORITY_TAGS = {
-    cadastro:{ alto:'Prioridade máxima', medio:'Prioridade', baixo:'Checklist contínuo' },
-    equipe:{ alto:'Treinar agora', medio:'Alinhar processos', baixo:'Reciclagem' },
-    financeiro:{ alto:'Organizar caixa', medio:'Afinar controles', baixo:'Saúde constante' },
-    contabil:{ alto:'Blindar compliance', medio:'Fortalecer compliance', baixo:'Manter compliance' }
-  };
-
-  const ACTION_PLAN_TEMPLATES = [
-    {
-      category:'cadastro',
-      icon:'🗂️',
-      title:'Recadastrar todos os itens com as regras da reforma',
-      subtitle:'A 3C organiza o mutirão de saneamento fiscal e confere item a item.',
-      description:'Atualize NCM, CST, CFOP, IVA e regras de destino para não perder créditos nem sofrer autuações.'
-    },
-    {
-      category:'equipe',
-      icon:'🎓',
-      title:'Treinar a equipe para a transição CBS/IBS',
-      subtitle:'Mentorias práticas, simulados e playbooks conduzidos pela 3C.',
-      description:'Garanta que fiscal, compras, vendas e TI saibam operar as novas notas e entender créditos.'
-    },
-    {
-      category:'financeiro',
-      icon:'💰',
-      title:'Fortalecer o financeiro para jogar o jogo dos créditos',
-      subtitle:'Implementamos controles, dashboards e rotinas de conferência diária.',
-      description:'Separe contas, projete fluxo de caixa e acompanhe créditos CBS/IBS antes de precificar.'
-    },
-    {
-      category:'contabil',
-      icon:'📚',
-      title:'Garantir contabilidade estratégica para evitar impostos indevidos',
-      subtitle:'Time 3C valida obrigações, acompanha legislações e ajusta o planejamento tributário.',
-      description:'Cruze escrituração com cadastros e notas para recolher só o necessário e evitar autuações.'
-    }
-  ];
-
-
-  function generateActionPlans(level){
-    return ACTION_PLAN_TEMPLATES.map(item=>({
-      icon:item.icon,
-      title:item.title,
-      subtitle:item.subtitle,
-      description:item.description,
-      category:item.category,
-      tag:ACTION_PRIORITY_TAGS[item.category]?.[level] || ACTION_PRIORITY_TAGS[item.category]?.medio || 'Prioridade'
-    }));
-  }
-
-  const actionPlans = {
-    alto: generateActionPlans('alto'),
-    medio: generateActionPlans('medio'),
-    baixo: generateActionPlans('baixo')
-  };
-
-  const serviceOffers = {
-    alto:[
-      {
-        icon:'🤝',
-        title:'Escritório fiscal dedicado 3C',
-        subtitle:'Exemplo: squad temporário com 2 analistas e revisões semanais',
-        description:'Assumimos o recadastro completo, entregamos cronograma de implantação CBS/IBS e acompanhamos o go-live.',
-        category:'consultoria',
-        tag:'Implantação 360°'
-      },
-      {
-        icon:'🧭',
-        title:'Projeto de governança financeira',
-        subtitle:'Exemplo: modelo de fluxo de caixa com visão de créditos CBS/IBS',
-        description:'Criamos dashboards, rotinas de conciliação e simulações para dar fôlego ao caixa durante a transição.',
-        category:'bpo',
-        tag:'BPO Financeiro'
-      },
-      {
-        icon:'🛡️',
-        title:'Compliance tributário contínuo',
-        subtitle:'Exemplo: revisão mensal + reporte executivo para diretoria',
-        description:'Monitoramos legislações, cruzamos obrigações acessórias e evitamos recolhimentos indevidos.',
-        category:'compliance',
-        tag:'Controle total'
-      }
-    ],
-    medio:[
-      {
-        icon:'🧰',
-        title:'Kit de transição CBS/IBS',
-        subtitle:'Exemplo: checklist + planilhas de simulação já configuradas',
-        description:'Guiamos ajustes de cadastro, sugerimos priorização por margem e apontamos ganhos rápidos.',
-        category:'consultoria',
-        tag:'Plano guiado'
-      },
-      {
-        icon:'📊',
-        title:'Painéis financeiros em tempo real',
-        subtitle:'Exemplo: indicadores de créditos, margem e ruptura por fornecedor',
-        description:'Integramos ERP e bancos de dados para que o financeiro acompanhe a reforma no dia a dia.',
-        category:'bpo',
-        tag:'Dados na mão'
-      },
-      {
-        icon:'🎯',
-        title:'Workshops setoriais',
-        subtitle:'Exemplo: trilha para fiscais, compradores e vendedores',
-        description:'Capacitamos a equipe com casos práticos e materiais exclusivos para reduzir erros na virada.',
-        category:'treinamento',
-        tag:'Capacitação'
-      }
-    ],
-    baixo:[
-      {
-        icon:'🧭',
-        title:'Mentoria de acompanhamento trimestral',
-        subtitle:'Exemplo: revisão dos indicadores e ajustes pontuais',
-        description:'Mantemos seu plano em dia, atualizamos cadastros e sinalizamos riscos antes que cresçam.',
-        category:'consultoria',
-        tag:'Supervisão 3C'
-      },
-      {
-        icon:'🔎',
-        title:'Auditoria preventiva de cadastros',
-        subtitle:'Exemplo: varredura por amostragem e relatório com prioridade de correção',
-        description:'Garantimos que a base continue limpa e aderente às mudanças da reforma.',
-        category:'compliance',
-        tag:'Checklist contínuo'
-      },
-      {
-        icon:'💡',
-        title:'Conteúdos e alertas exclusivos',
-        subtitle:'Exemplo: boletins sobre normas CBS/IBS e oportunidades de crédito',
-        description:'Receba atualizações rápidas e saiba quando agir para proteger margens e fluxo de caixa.',
-        category:'treinamento',
-        tag:'Atualização'
-      }
-    ]
-  };
+  // Removidos planos detalhados e ofertas de serviço para simplificar a área de resultado
 
   function classifyImpactLevel(value){
-    if(value >= 80) return 'alto';
-    if(value >= 50) return 'medio';
+    if(value >= 60) return 'alto';
+    if(value >= 30) return 'medio';
     return 'baixo';
   }
 
@@ -316,176 +181,7 @@
     return relevant.slice(0,4).map(detail=>buildInsightFor(detail.key, detail.value));
   }
 
-  function renderInsights(details){
-    const activeStep = steps[current];
-    if(!activeStep) return;
-    const container = activeStep.querySelector('[data-role="insights"]');
-    if(!container) return;
-    container.innerHTML = '';
-    const insights = buildInsights(details);
-    if(!insights.length){
-      const empty = document.createElement('p');
-      empty.className = 'result-insights__empty';
-      empty.textContent = 'Complete o diagnóstico para ver os principais fatores de impacto.';
-      container.appendChild(empty);
-      return;
-    }
-
-    insights.forEach(info=>{
-      const item = document.createElement('div');
-      item.className = `result-insights__item result-insights__item--${info.level}`;
-
-      const badge = document.createElement('span');
-      badge.className = 'result-insights__badge';
-      badge.textContent = levelStyles[info.level].icon;
-
-      const content = document.createElement('div');
-      content.className = 'result-insights__content';
-
-      const heading = document.createElement('span');
-      heading.className = 'result-insights__heading';
-      heading.textContent = info.title;
-
-      const label = document.createElement('span');
-      label.className = 'result-insights__label';
-      label.textContent = `Resposta: ${info.label}`;
-
-      const text = document.createElement('p');
-      text.className = 'result-insights__text';
-      text.textContent = info.message;
-
-      content.appendChild(heading);
-      content.appendChild(label);
-      content.appendChild(text);
-
-      const tag = document.createElement('span');
-      tag.className = 'result-insights__tag';
-      tag.textContent = levelStyles[info.level].label;
-
-      item.appendChild(badge);
-      item.appendChild(content);
-      item.appendChild(tag);
-
-      container.appendChild(item);
-    });
-  }
-
-  function renderActions(resultClass){
-    const activeStep = steps[current];
-    if(!activeStep) return;
-    const container = activeStep.querySelector('[data-role="actions"]');
-    if(!container) return;
-    container.innerHTML = '';
-  const plans = actionPlans[resultClass] || [];
-    if(!plans.length){
-      const empty = document.createElement('p');
-      empty.className = 'result-actions__empty';
-      empty.textContent = 'Breve adicionaremos planos de ação personalizados aqui.';
-      container.appendChild(empty);
-      return;
-    }
-
-    plans.forEach(plan=>{
-      const item = document.createElement('div');
-      item.className = `result-actions__item result-actions__item--${plan.category}`;
-
-      const badge = document.createElement('span');
-      badge.className = `result-actions__badge result-actions__badge--${plan.category}`;
-      badge.textContent = plan.icon;
-
-      const content = document.createElement('div');
-      content.className = 'result-actions__content';
-
-      const heading = document.createElement('span');
-      heading.className = 'result-actions__heading';
-      heading.textContent = plan.title;
-
-      const label = document.createElement('span');
-      label.className = 'result-actions__label';
-      if(plan.subtitle){
-        label.textContent = plan.subtitle;
-      }
-
-      const text = document.createElement('p');
-      text.className = 'result-actions__text';
-      text.textContent = plan.description;
-
-      content.appendChild(heading);
-      if(plan.subtitle) content.appendChild(label);
-      content.appendChild(text);
-
-      item.appendChild(badge);
-      item.appendChild(content);
-      if(plan.tag){
-        const tag = document.createElement('span');
-        tag.className = `result-actions__tag result-actions__tag--${plan.category}`;
-        tag.textContent = plan.tag;
-        item.appendChild(tag);
-      }
-
-      container.appendChild(item);
-    });
-
-  }
-
-  function renderServices(resultClass){
-    const activeStep = steps[current];
-    if(!activeStep) return;
-    const container = activeStep.querySelector('[data-role="services"]');
-    if(!container) return;
-    container.innerHTML = '';
-  const offers = serviceOffers[resultClass] || [];
-    if(!offers.length){
-      const empty = document.createElement('p');
-      empty.className = 'result-services__empty';
-      empty.textContent = 'Em breve, adicionaremos exemplos de como a 3C pode apoiar sua empresa.';
-      container.appendChild(empty);
-      return;
-    }
-
-    offers.forEach(offer=>{
-      const item = document.createElement('div');
-      item.className = `result-services__item result-services__item--${offer.category}`;
-
-      const badge = document.createElement('span');
-      badge.className = `result-services__badge result-services__badge--${offer.category}`;
-      badge.textContent = offer.icon;
-
-      const content = document.createElement('div');
-      content.className = 'result-services__content';
-
-      const heading = document.createElement('span');
-      heading.className = 'result-services__heading';
-      heading.textContent = offer.title;
-
-      const label = document.createElement('span');
-      label.className = 'result-services__label';
-      if(offer.subtitle){
-        label.textContent = offer.subtitle;
-      }
-
-      const text = document.createElement('p');
-      text.className = 'result-services__text';
-      text.textContent = offer.description;
-
-      content.appendChild(heading);
-      if(offer.subtitle) content.appendChild(label);
-      content.appendChild(text);
-
-      item.appendChild(badge);
-      item.appendChild(content);
-
-      if(offer.tag){
-        const tag = document.createElement('span');
-        tag.className = `result-services__tag result-services__tag--${offer.category}`;
-        tag.textContent = offer.tag;
-        item.appendChild(tag);
-      }
-
-      container.appendChild(item);
-    });
-
-  }
+  // Removidos renderizadores de insights, ações e serviços (conteúdo substituído por callout fixo no HTML)
 
   const multiEvaluators = {
     Q5(selected){
@@ -789,9 +485,10 @@
     const prefix = nome ? `Olá, sou ${encodeURIComponent(nome)}. ` : 'Olá, ';
 
   const whatsPhone = '5567996987023';
-  document.getElementById('whatsAlto').href = `https://wa.me/${whatsPhone}?text=${prefix}vi meu resultado no diagnóstico (alto impacto) e quero um plano de ação.`;
-  document.getElementById('whatsMedio').href = `https://wa.me/${whatsPhone}?text=${prefix}preciso de um diagnóstico detalhado sobre meu Índice de Impacto (médio).`;
-  document.getElementById('whatsBaixo').href = `https://wa.me/${whatsPhone}?text=${prefix}tenho dúvidas rápidas sobre meu resultado (baixo impacto).`;
+  const waMsg = `${prefix}quero falar com um especialista para transformar a Reforma Tributária em lucro na minha empresa.`;
+  document.getElementById('whatsAlto').href = `https://wa.me/${whatsPhone}?text=${waMsg}`;
+  document.getElementById('whatsMedio').href = `https://wa.me/${whatsPhone}?text=${waMsg}`;
+  document.getElementById('whatsBaixo').href = `https://wa.me/${whatsPhone}?text=${waMsg}`;
 
     const mailtoLink = document.getElementById('mailtoMedio');
     if(mailtoLink){
@@ -816,9 +513,6 @@
     setStep(targetStepIndex);
     requestAnimationFrame(()=>{
       updateImpactMeters(scoreInt, resultClass);
-      renderInsights(details);
-      renderActions(resultClass);
-      renderServices(resultClass);
     });
 
     applyUTMs();
@@ -974,9 +668,36 @@
     const whatsEl = document.querySelector('input[name="whatsapp"]');
     const nome = (nomeEl?.value||'').trim();
     const whatsapp = (whatsEl?.value||'').trim();
+    const emailEl = document.querySelector('input[name="email"]');
+    const email = (emailEl?.value||'').trim();
+    // Limpa erros anteriores
+    [nomeEl, whatsEl, emailEl].forEach(el=>el?.classList.remove('error'));
+    document.querySelectorAll('.field-error').forEach(el=>el.textContent='');
+
     let ok = true;
-    if(!nome){ nomeEl?.classList.add('error'); ok = false; }
-    if(!whatsapp){ whatsEl?.classListadd('error'); ok = false; }
+    if(!nome){
+      nomeEl?.classList.add('error');
+      document.querySelector('[data-error-for="nome"]').textContent = 'Informe seu nome';
+      ok = false;
+    }
+
+    // Validação de WhatsApp: aceita apenas dígitos, entre 10 e 12 (ex.: 67 + 9 dígitos)
+    const onlyDigits = whatsapp.replace(/\D+/g,'');
+    const validWhats = /^\d{10,12}$/.test(onlyDigits);
+    if(!validWhats){
+      whatsEl?.classList.add('error');
+      document.querySelector('[data-error-for="whatsapp"]').textContent = 'Informe um WhatsApp válido. Ex.: 67 99999-9999';
+      ok = false;
+    }
+
+    // Validação de e-mail simples (RFC-like)
+    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if(!validEmail){
+      emailEl?.classList.add('error');
+      document.querySelector('[data-error-for="email"]').textContent = 'Informe um e-mail válido. Ex.: escrita8@3ccontabilidade.com.br';
+      ok = false;
+    }
+
     return ok;
   }
 
@@ -997,9 +718,45 @@
     input.addEventListener('input', ()=>{
       input.classList.remove('error');
       updateFooterControls();
+      const err = document.querySelector(`[data-error-for="${name}"]`);
+      if(err) err.textContent = '';
     });
   });
 
   setStep(0);
   setupAdmin();
+  // Fallback se o vídeo local não carregar (ex.: arquivo ausente ou codec não suportado)
+  (function setupVideoFallback(){
+    const frames = document.querySelectorAll('.result-video__frame');
+    frames.forEach(frame => {
+      const video = frame.querySelector('video.result-video__player');
+      if(!video) return;
+      // Ajusta o aspect-ratio do container baseado nas dimensões reais do vídeo
+      const setAspect = () => {
+        if(video.videoWidth && video.videoHeight){
+          const ratio = video.videoWidth / video.videoHeight;
+          frame.style.aspectRatio = `${ratio}`;
+        }
+      };
+      video.addEventListener('loadedmetadata', setAspect, { once:true });
+      if(video.readyState >= 1) setAspect();
+      const showFallback = () => {
+        const fallback = document.createElement('div');
+        fallback.className = 'result-video__fallback';
+        const src = (video.querySelector('source')?.getAttribute('src')) || '';
+        const link = src ? `<a href="${src}" download>baixar o vídeo</a>` : 'tentar novamente mais tarde';
+        fallback.innerHTML = `Não foi possível carregar o vídeo agora.<br><small>Verifique se o arquivo existe e está em MP4 (H.264/AAC). Você pode ${link}.</small>`;
+        frame.replaceChildren(fallback);
+      };
+      video.addEventListener('error', showFallback, { once:true });
+      video.addEventListener('stalled', showFallback, { once:true });
+      video.addEventListener('abort', showFallback, { once:true });
+      // Se não houver fonte válida, o Chrome marca como NETWORK_NO_SOURCE
+      setTimeout(() => {
+        if(video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE){
+          showFallback();
+        }
+      }, 400);
+    });
+  })();
 })();
