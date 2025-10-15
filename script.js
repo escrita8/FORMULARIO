@@ -208,6 +208,12 @@
   }
 
   function setStep(idx){
+    // Pausa todos os vídeos quando trocar de etapa
+    try{
+      document.querySelectorAll('video.result-video__player').forEach(v=>{
+        if(!v.paused){ v.pause(); }
+      });
+    }catch(e){}
     steps.forEach(step=>step.classList.remove('active'));
     const step = steps[idx];
     if(step){
@@ -758,5 +764,30 @@
         }
       }, 400);
     });
+  })();
+
+  // Autoplay do vídeo quando entrar na tela (viewport)
+  (function setupVideoAutoplay(){
+    const videos = Array.from(document.querySelectorAll('video.result-video__player'));
+    if(!('IntersectionObserver' in window) || !videos.length){
+      return; // Sem suporte, não faz nada
+    }
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const video = entry.target;
+        if(!(video instanceof HTMLVideoElement)) return;
+        if(entry.isIntersecting && entry.intersectionRatio > 0.5){
+          // Para autoplay mobile/Chrome, manter muted + playsinline
+          video.muted = true;
+          const p = video.play();
+          if(p && typeof p.catch === 'function'){
+            p.catch(()=>{/* ignore bloqueio */});
+          }
+        } else {
+          if(!video.paused){ video.pause(); }
+        }
+      });
+    }, { threshold: [0, 0.5, 1] });
+    videos.forEach(v=>observer.observe(v));
   })();
 })();
