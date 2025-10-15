@@ -2,72 +2,14 @@
 // Se deixar em branco, o script usa a planilha/aba ativa (recomendado se o script estiver vinculado à planilha).
 var SHEET_ID = '';
 var SHEET_NAME = '';
-// Defina aqui os nomes desejados das colunas (linha 1 da aba)
-var HEADERS = [
-  'ts', 'score', 'result',
-  'nome', 'empresa', 'whatsapp', 'email',
-  'utm_source', 'utm_medium', 'utm_campaign',
-  'Q2_label', 'Q2_value',
-  'Q3_label', 'Q3_value',
-  'Q4_label', 'Q4_value',
-  'Q7_label', 'Q7_value'
-];
-// Token opcional para operações administrativas via doGet
-var ADMIN_TOKEN = '';
 
 function ensureHeaders(sheet, headers) {
-  headers = headers && headers.length ? headers : HEADERS;
   var firstRow = sheet.getRange(1, 1, 1, headers.length).getValues()[0];
   var hasAny = firstRow.some(function (v) { return v && String(v).trim(); });
   var same = firstRow.join('|') === headers.join('|');
   if (!hasAny || !same) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
   }
-}
-
-// Define/atualiza a linha de cabeçalho com os nomes em HEADERS (não apaga dados nas linhas abaixo)
-function applyHeaders() {
-  var sheet = getSheet();
-  ensureHeaders(sheet, HEADERS);
-}
-
-// Renomeia uma coluna pelo nome atual do cabeçalho
-function renameColumn(oldName, newName) {
-  if (!oldName || !newName) throw new Error('Parâmetros inválidos: oldName/newName');
-  var sheet = getSheet();
-  var lastCol = Math.max(sheet.getLastColumn(), HEADERS.length);
-  var firstRow = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-  var idx = -1;
-  for (var i = 0; i < firstRow.length; i++) {
-    if (String(firstRow[i]).trim() === String(oldName).trim()) { idx = i; break; }
-  }
-  if (idx === -1) throw new Error('Coluna não encontrada: ' + oldName);
-  firstRow[idx] = newName;
-  sheet.getRange(1, 1, 1, firstRow.length).setValues([firstRow]);
-}
-
-// Renomeia várias colunas com base em um objeto { antigoNome: novoNome, ... }
-function renameColumns(map) {
-  if (!map || typeof map !== 'object') throw new Error('Mapa de renome inválido');
-  var sheet = getSheet();
-  var lastCol = Math.max(sheet.getLastColumn(), HEADERS.length);
-  var firstRow = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-  var changed = false;
-  for (var oldName in map) {
-    if (!map.hasOwnProperty(oldName)) continue;
-    var newName = map[oldName];
-    for (var i = 0; i < firstRow.length; i++) {
-      if (String(firstRow[i]).trim() === String(oldName).trim()) {
-        firstRow[i] = newName;
-        changed = true;
-        break;
-      }
-    }
-  }
-  if (changed) {
-    sheet.getRange(1, 1, 1, firstRow.length).setValues([firstRow]);
-  }
-  return changed;
 }
 
 function parsePayload(e) {
@@ -115,8 +57,18 @@ function doPost(e) {
     var contact = payload.contact || {};
     var utm = payload.utm || {};
 
+    var headers = [
+      'DATA/HORA', 'SCORE', 'RESULTADO',
+      'NOME', 'EMPRESA', 'WHATSAPP', 'EMAIL',
+      'utm_source', 'utm_medium', 'utm_campaign',
+      'FUNCIONARIOS', 'Q2_value',
+      'FATURAMENTO', 'Q3_value',
+      'REGIME', 'Q4_value',
+      'SISTEMA/FINANCEIRO', 'Q7_value'
+    ];
+
     var sheet = getSheet();
-    ensureHeaders(sheet, HEADERS);
+    ensureHeaders(sheet, headers);
 
     var row = [
       payload.ts || new Date().toISOString(),
@@ -129,12 +81,16 @@ function doPost(e) {
       utm.utm_source || '',
       utm.utm_medium || '',
       utm.utm_campaign || '',
+      // FUNCIONARIOS = label correspondente a R2
       payload.Q2_label || '',
       payload.Q2_value || '',
+      // FATURAMENTO = label correspondente a R3
       payload.Q3_label || '',
       payload.Q3_value || '',
+      // REGIME = label correspondente a Q1
       payload.Q4_label || '',
       payload.Q4_value || '',
+      // SISTEMA/FINANCEIRO = label correspondente a Q4
       payload.Q7_label || '',
       payload.Q7_value || ''
     ];
@@ -149,29 +105,6 @@ function doPost(e) {
   }
 }
 
-function doGet(e) {
-  // Acesso simples para health-check
-  if (!e || !e.parameter || !e.parameter.action) {
-    return ContentService.createTextOutput('OK').setMimeType(ContentService.MimeType.TEXT);
-  }
-  var action = e.parameter.action;
-  var token = e.parameter.token || '';
-  if (ADMIN_TOKEN && token !== ADMIN_TOKEN) {
-    return ContentService.createTextOutput('Unauthorized').setMimeType(ContentService.MimeType.TEXT);
-  }
-  try {
-    if (action === 'applyHeaders') {
-      applyHeaders();
-      return ContentService.createTextOutput('Headers applied').setMimeType(ContentService.MimeType.TEXT);
-    }
-    if (action === 'rename') {
-      var oldName = e.parameter.old;
-      var newName = e.parameter.new;
-      renameColumn(oldName, newName);
-      return ContentService.createTextOutput('Column renamed').setMimeType(ContentService.MimeType.TEXT);
-    }
-    return ContentService.createTextOutput('Unknown action').setMimeType(ContentService.MimeType.TEXT);
-  } catch (err) {
-    return ContentService.createTextOutput('Error: ' + err.toString()).setMimeType(ContentService.MimeType.TEXT);
-  }
+function doGet() {
+  return ContentService.createTextOutput('OK').setMimeType(ContentService.MimeType.TEXT);
 }
