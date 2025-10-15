@@ -102,8 +102,15 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 @media (max-width:600px){
   .actions__title{font-size:16px}
 }
-.btn.btn--hero{background:linear-gradient(180deg,#22c55e,#16a34a);color:#fff;font-size:17px;padding:18px 20px;border-radius:14px;box-shadow:0 14px 32px rgba(22,163,74,.25), inset 0 1px 0 rgba(255,255,255,.25);max-width:520px;align-self:center}
+.btn.btn--hero{background:linear-gradient(180deg,#22c55e,#16a34a);color:#fff;font-size:17px;padding:22px 22px;border-radius:14px;box-shadow:0 14px 32px rgba(22,163,74,.25), inset 0 1px 0 rgba(255,255,255,.25);max-width:520px;align-self:center;animation:heroPulse 2.8s ease-in-out infinite}
 .btn.btn--hero:hover{filter:brightness(1.02);transform:translateY(-2px);box-shadow:0 18px 40px rgba(22,163,74,.28)}
+@keyframes heroPulse{
+  0%,100%{box-shadow:0 14px 32px rgba(22,163,74,.25), inset 0 1px 0 rgba(255,255,255,.25)}
+  50%{box-shadow:0 18px 44px rgba(22,163,74,.32), 0 0 0 8px rgba(34,197,94,.10), inset 0 1px 0 rgba(255,255,255,.25)}
+}
+@media (prefers-reduced-motion: reduce){
+  .btn.btn--hero{animation:none}
+}
 
 /* Vídeo no resultado */
 .result-video{margin:35px 0 6px;display:flex;justify-content:center}
