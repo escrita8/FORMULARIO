@@ -3,17 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Diagnóstico de Impacto da Reforma Tributária • 3C CONTABILIDADE</title>
   <meta name="description" content="São 8 perguntas  •  3 minutos  •  Resultado na hora. Descubra o impacto da Reforma Tributária no seu negócio." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function(){
+      var APP_VERSION = '2025-10-17-01';
+      try {
+        var url = new URL(window.location.href);
+        if(url.searchParams.get('v') !== APP_VERSION){
+          url.searchParams.set('v', APP_VERSION);
+          // preserva UTMs e substitui sem criar histórico extra
+          window.location.replace(url.toString());
+        }
+      } catch(e){ /* segue normal se falhar */ }
+      window.APP_VERSION = APP_VERSION;
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=2025-10-17-01" />
   <!-- Grid.js para tabelas bonitonas -->
   <link rel="stylesheet" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css">
   <script defer src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
   <script>
-    window.RESPONDER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxovH-pRx2oJR9UMvFDl-QgBvs7SQE0p2iAsTxwN0-zVOZhEdjidsVtXbqnz9ovEB21CA/exec';
+    window.RESPONDER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzFH12DfGBVCRwBfY_df6xwhXCw5k-mjgZOa4fHCIGzA0q0SQ14_9QFBOyJ-KS_WZiiEg/exec';
   </script>
 </head>
 <body>
@@ -27,8 +44,8 @@
       </div>
       <div class="brand__center">
         <img 
-          src="logo.png"
-          srcset="logo.png 1x, logo@2x.png 2x"
+          src="logo.png?v=2025-10-17-01"
+          srcset="logo.png?v=2025-10-17-01 1x, logo@2x.png?v=2025-10-17-01 2x"
           sizes="(min-width:768px) 160px, 120px"
           alt="3C CONTABILIDADE"
           class="brand__logo"
@@ -225,8 +242,8 @@
         </div>
         <div class="result-video">
           <div class="result-video__frame">
-            <video class="result-video__player" controls playsinline webkit-playsinline preload="metadata" muted poster="media/video-poster.jpg">
-              <source src="media/Video%20Sobre%20a%20Reforma.mp4" type="video/mp4" />
+            <video class="result-video__player" controls playsinline webkit-playsinline preload="metadata" muted poster="media/video-poster.jpg?v=2025-10-17-01">
+              <source src="media/Video%20Sobre%20a%20Reforma.mp4?v=2025-10-17-01" type="video/mp4" />
               Seu navegador não suporta vídeo HTML5. Você pode <a href="media/Video%20Sobre%20a%20Reforma.mp4" download>baixar o vídeo em MP4</a>.
             </video>
           </div>
@@ -338,6 +355,6 @@
     </footer>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2025-10-17-01"></script>
 </body>
 </html>
