@@ -191,24 +191,7 @@
 
   // Removidos renderizadores de insights, ações e serviços (conteúdo substituído por callout fixo no HTML)
 
-  const multiEvaluators = {
-    Q5(selected){
-      const keys = selected.map(btn=>btn.dataset.optionKey);
-      const informative = keys.filter(k=>k && k !== 'financeiro_basico');
-      const hasFragile = keys.includes('financeiro_basico');
-      let impact = hasFragile ? 95 : 60;
-      impact -= informative.length * 10;
-      if(hasFragile && informative.length <= 1){
-        impact = Math.max(impact, 98);
-      } else if(hasFragile){
-        impact = Math.max(impact, 85);
-      } else if(!informative.length){
-        impact = Math.max(impact, 75);
-      }
-      impact = Math.min(100, Math.max(15, Math.round(impact)));
-      return impact;
-    }
-  };
+  // multiEvaluators removido pois Q5 agora é escolha única
 
   function getContactIndex(){
     const idx = steps.findIndex(s=>s.querySelector('#contactForm'));
@@ -277,26 +260,7 @@
   function selectOption(btn){
     const container = btn.parentElement;
     const question = container.dataset.question;
-    const isMulti = container.dataset.multi === 'true';
 
-    if(isMulti){
-      btn.classList.toggle('selected');
-      const selected = Array.from(container.querySelectorAll('.option.selected'));
-      if(!selected.length){
-        answers[question] = null;
-        answerMeta[question] = null;
-      } else {
-        const evaluator = multiEvaluators[question];
-        const value = evaluator ? evaluator(selected) : Math.round(selected.reduce((acc,item)=>acc+Number(item.dataset.value||0),0) / selected.length || 0);
-        answers[question] = value;
-        answerMeta[question] = selected.map(item=>({
-          key: item.dataset.optionKey || null,
-          label: item.textContent.trim()
-        }));
-      }
-      updateFooterControls();
-      return;
-    }
 
     Array.from(container.querySelectorAll('.option')).forEach(option=>option.classList.remove('selected'));
     btn.classList.add('selected');
@@ -770,7 +734,7 @@
     });
   });
 
-  setStep(0);
+  setStep(1);
   setupAdmin();
   // Fallback se o vídeo local não carregar (ex.: arquivo ausente ou codec não suportado)
   (function setupVideoFallback(){
