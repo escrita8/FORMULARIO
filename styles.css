@@ -96,7 +96,12 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 
 /* Resultados: empilhar botões um abaixo do outro */
 .step[data-result] .actions{flex-direction:column;align-items:flex-start}
-.step[data-result] .actions .btn{width:100%;max-width:400px}
+.step[data-result] .actions .btn{
+  width:100%;
+  max-width:600px;
+  font-size:1.25rem;
+  padding:20px 0;
+}
 .step[data-result] .actions.actions--single{align-items:stretch}
 .actions__title{margin:6px 0 10px;color:var(--gray-900);font-weight:800;letter-spacing:.2px;font-size:18px;line-height:1.25;text-align:center}
 @media (max-width:600px){
