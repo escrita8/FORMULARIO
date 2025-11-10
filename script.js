@@ -789,4 +789,49 @@
     }, { threshold: [0, 0.5, 1] });
     videos.forEach(v=>observer.observe(v));
   })();
+
+  // Overlay para ativar áudio no vídeo (user gesture)
+  (function setupVideoAudioToggle(){
+    const frames = Array.from(document.querySelectorAll('.result-video__frame'));
+    frames.forEach(frame=>{
+      const video = frame.querySelector('video.result-video__player');
+      if(!video) return;
+
+      // Cria overlay apenas se não existir
+      let overlay = frame.querySelector('.video-audio-overlay');
+      if(!overlay){
+        overlay = document.createElement('button');
+        overlay.type = 'button';
+        overlay.className = 'video-audio-overlay';
+        overlay.setAttribute('aria-label','Ativar áudio do vídeo');
+        overlay.innerHTML = '🔊&nbsp;&nbsp;Ativar áudio';
+        frame.appendChild(overlay);
+      }
+
+      const updateOverlay = () => {
+        if(video.muted){
+          overlay.classList.remove('video-audio-overlay--hidden');
+        } else {
+          overlay.classList.add('video-audio-overlay--hidden');
+        }
+      };
+
+      overlay.addEventListener('click', ()=>{
+        try{
+          video.muted = false;
+          const p = video.play();
+          if(p && typeof p.catch === 'function'){
+            p.catch(()=>{/* ignore bloqueio eventual */});
+          }
+        }catch(e){}
+        updateOverlay();
+      });
+
+      video.addEventListener('volumechange', updateOverlay);
+      video.addEventListener('play', updateOverlay);
+      video.addEventListener('pause', updateOverlay);
+      // Inicializa estado
+      updateOverlay();
+    });
+  })();
 })();

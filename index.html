@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     (function(){
-  var APP_VERSION = '2025-11-10-01';
+  var APP_VERSION = '2025-11-10-02';
       try {
         var url = new URL(window.location.href);
         if(url.searchParams.get('v') !== APP_VERSION){
@@ -25,7 +25,7 @@
       window.APP_VERSION = APP_VERSION;
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=2025-11-10-01" />
+  <link rel="stylesheet" href="styles.css?v=2025-11-10-02" />
   <!-- Grid.js para tabelas bonitonas -->
   <link rel="stylesheet" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css">
   <script defer src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
@@ -42,6 +42,9 @@
         <div id="progressBar" class="progress__bar" style="width:0%"></div>
       </div>
 
+      <!-- Ambient shapes (ilustrações flutuantes entre as telas) -->
+      <div class="ambient-shapes" aria-hidden="true"></div>
+
       <style>
         .footer-controls { display: none !important; }
       </style>
@@ -49,9 +52,9 @@
       <!-- Step: Formulário inicial (Contato) -->
       <section class="step active" data-step="0">
         <div class="intro-card">
-          <h1>Descubra o impacto da Reforma Tributária</h1>
+          <h1>Descubra o impacto da Reforma Tributária 💰</h1>
           <p class="subtitle">São 8 perguntas • 2 minutos • Resultado na hora</p>
-          <p class="desc">Preencha seus dados e avance para o diagnóstico gratuito. Você receberá um índice personalizado e poderá falar com um especialista para transformar a reforma em oportunidade.</p>
+          <p class="desc">Preencha seus dados e avance para o diagnóstico gratuito. Você receberá um índice personalizado e poderá falar com um especialista.</p>
           <form id="contactForm" class="form" novalidate>
             <label>
               Nome:
@@ -320,6 +323,6 @@
     </footer>
   </div>
 
-  <script src="script.js?v=2025-11-10-01"></script>
+  <script src="script.js?v=2025-11-10-02"></script>
 </body>
 </html>

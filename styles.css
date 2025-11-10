@@ -326,6 +326,24 @@ html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,
 .step:not([data-result]):not([data-step="0"]) > h2{background:linear-gradient(180deg,#ffffff 0%,#f5f8fd 100%);border:1px solid #e3eaf3;padding:14px 16px;border-radius:14px;box-shadow:0 8px 22px rgba(15,23,42,.06)}
 .step:not([data-result]):not([data-step="0"]) .options{margin-top:14px}
 
+/* Ambient floating shapes background */
+.ambient-shapes{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.ambient-shapes::before,.ambient-shapes::after{content:"";position:absolute;border-radius:50%;filter:blur(40px);opacity:.35;animation:floatY 18s linear infinite alternate}
+.ambient-shapes::before{width:420px;height:420px;top:-120px;right:-160px;background:radial-gradient(circle at 30% 30%,rgba(30,136,229,.55),rgba(92,107,192,.25),rgba(255,255,255,0));animation-delay:0s}
+.ambient-shapes::after{width:520px;height:520px;bottom:-180px;left:-220px;background:radial-gradient(circle at 70% 70%,rgba(66,165,245,.50),rgba(30,136,229,.35),rgba(255,255,255,0));animation-delay:4s}
+@keyframes floatY{0%{transform:translateY(0)}100%{transform:translateY(40px)}}
+@media (max-width:700px){
+  .ambient-shapes::before{width:260px;height:260px;top:-80px;right:-100px}
+  .ambient-shapes::after{width:320px;height:320px;bottom:-120px;left:-140px}
+}
+
+/* Audio overlay button on videos */
+.video-audio-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.35) 100%);color:#fff;font-weight:700;font-size:15px;letter-spacing:.5px;cursor:pointer;border:none;font-family:inherit;backdrop-filter:blur(4px);transition:opacity .35s ease, transform .35s ease}
+.video-audio-overlay:hover{transform:scale(1.025)}
+.video-audio-overlay--hidden{opacity:0;pointer-events:none}
+.video-audio-overlay::after{content:"";position:absolute;inset:0;border:2px dashed rgba(255,255,255,.18);border-radius:14px}
+.result-video__frame{overflow:hidden}
+
 /* Responsividade do breakdown no mobile */
 @media (max-width: 520px){
   .breakdown__list--3col li{
