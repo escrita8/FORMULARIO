@@ -7,13 +7,13 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Diagnóstico de Impacto da Reforma Tributária • 3C CONTABILIDADE</title>
-  <meta name="description" content="São 8 perguntas  •  3 minutos  •  Resultado na hora. Descubra o impacto da Reforma Tributária no seu negócio." />
+  <meta name="description" content="São 8 perguntas  •  2 minutos  •  Resultado na hora. Descubra o impacto da Reforma Tributária no seu negócio." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     (function(){
-      var APP_VERSION = '2025-10-17-01';
+  var APP_VERSION = '2025-11-10-01';
       try {
         var url = new URL(window.location.href);
         if(url.searchParams.get('v') !== APP_VERSION){
@@ -25,7 +25,7 @@
       window.APP_VERSION = APP_VERSION;
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=2025-10-17-01" />
+  <link rel="stylesheet" href="styles.css?v=2025-11-10-01" />
   <!-- Grid.js para tabelas bonitonas -->
   <link rel="stylesheet" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css">
   <script defer src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
@@ -46,19 +46,32 @@
         .footer-controls { display: none !important; }
       </style>
 
-      <!-- Step: Cover -->
+      <!-- Step: Formulário inicial (Contato) -->
       <section class="step active" data-step="0">
-        <h1>Descubra o impacto da Reforma Tributária</h1>
-  <p class="subtitle">São 8 perguntas  •  3 minutos  •  Resultado na hora</p>
-        <p class="desc">A 3C CONTABILIDADE preparou um diagnóstico rápido para estimar como a Reforma Tributária pode afetar sua carga tributária e processos. No final, você recebe seu Índice de Impacto e recomendações práticas, hoje contamos com cerca de 40 consultores especializados no assunto para melhor atender!</p>
-        <ul class="bullets">
-          <li>✅ Rápido e Gratuito</li>
-          <li>📊 Índice de Impacto (0% a 100%)</li>
-          <li>🤝 Suporte Especializado 3C</li>
-        </ul>
-        <p class="note">LGPD: Usaremos seus dados apenas para tratar os resultados e contato sobre a pesquisa. Não compartilhamos com terceiros.</p>
-        <div class="actions">
-          <button class="btn btn--primary" data-action="next">Começar agora</button>
+        <div class="intro-card">
+          <h1>Descubra o impacto da Reforma Tributária</h1>
+          <p class="subtitle">São 8 perguntas • 2 minutos • Resultado na hora</p>
+          <p class="desc">Preencha seus dados e avance para o diagnóstico gratuito. Você receberá um índice personalizado e poderá falar com um especialista para transformar a reforma em oportunidade.</p>
+          <form id="contactForm" class="form" novalidate>
+            <label>
+              Nome:
+              <input type="text" name="nome" placeholder="Seu nome" />
+              <small class="field-error" data-error-for="nome" aria-live="polite"></small>
+            </label>
+            <label>
+              Nome da empresa:
+              <input type="text" name="empresa" placeholder="Razão social ou nome fantasia" />
+            </label>
+            <label>
+              WhatsApp:
+              <input type="tel" name="whatsapp" inputmode="tel" placeholder="Ex.: 67 99999-9999" />
+              <small class="field-error" data-error-for="whatsapp" aria-live="polite"></small>
+            </label>
+          </form>
+          <p class="note">LGPD: Usaremos seus dados apenas para este diagnóstico e contato sobre a Reforma.</p>
+          <div class="actions actions--center">
+            <button class="btn btn--primary btn--start" data-action="next">Iniciar Teste Gratuito</button>
+          </div>
         </div>
       </section>
 
@@ -158,37 +171,6 @@
         </div>
       </section>
 
-      <!-- Contato (opcional) -->
-      <section class="step" data-step="8">
-        <h2>Preencha seus dados para ver o resultado</h2>
-      
-        <form id="contactForm" class="form" novalidate>
-          <label>
-            Nome
-            <input type="text" name="nome" placeholder="Seu nome" />
-            <small class="field-error" data-error-for="nome" aria-live="polite"></small>
-          </label>
-          <label>
-            Nome da empresa
-            <input type="text" name="empresa" placeholder="Razão social ou nome fantasia" />
-          </label>
-          <label>
-            WhatsApp
-            <input type="tel" name="whatsapp" inputmode="tel" placeholder="Ex.: 67 99999-9999" />
-            <small class="field-error" data-error-for="whatsapp" aria-live="polite"></small>
-          </label>
-            <label>
-              E-mail
-              <input type="email" name="email" placeholder="exemplo@gmail.com.br" />
-              <small class="field-error" data-error-for="email" aria-live="polite"></small>
-            </label>
-        </form>
-        <p class="note">Ao enviar, você autoriza contato da 3C CONTABILIDADE sobre este diagnóstico.</p>
-        <div class="actions">
-          <button class="btn" data-action="prev">Voltar</button>
-          <button class="btn btn--primary" data-action="next">Ver resultado</button>
-        </div>
-      </section>
 
       <!-- Result: Alto impacto -->
       <section class="step" data-step="9" data-result="alto">
@@ -338,6 +320,6 @@
     </footer>
   </div>
 
-  <script src="script.js?v=2025-10-17-01"></script>
+  <script src="script.js?v=2025-11-10-01"></script>
 </body>
 </html>

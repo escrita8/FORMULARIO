@@ -216,8 +216,13 @@
   }
 
   function updateProgress(){
-    const contactIdx = getContactIndex();
-    const percent = Math.min((current / contactIdx) * 100, 100);
+    // Última pergunta = índice da etapa com Q5 (financeiro)
+    const lastQuestionIdx = steps.findIndex(s=>s.querySelector('.options[data-question="Q5"]'));
+    if(lastQuestionIdx <= 0){
+      if(progressBar) progressBar.style.width = '0%';
+      return;
+    }
+    const percent = Math.min((current / lastQuestionIdx) * 100, 100);
     if(progressBar) progressBar.style.width = `${percent}%`;
   }
 
@@ -225,14 +230,12 @@
     const footer = document.querySelector('.footer-controls');
     if(!footer) return;
     const isResult = steps[current]?.dataset.result;
-    footer.style.display = current === 0 || isResult ? 'none' : 'flex';
+    footer.style.display = 'none'; // permanecem ocultos no fluxo atual
 
     if(footerPrev) footerPrev.style.display = current>0 ? 'inline-flex' : 'none';
 
-    const contactIdx = getContactIndex();
     if(footerNext){
-      if(current===0) footerNext.textContent = 'Começar';
-      else if(current===contactIdx) footerNext.textContent = 'Ver resultado';
+      if(current===0) footerNext.textContent = 'Iniciar';
       else footerNext.textContent = 'Próximo';
     }
 
@@ -247,11 +250,10 @@
       }
     }
 
-    if(current === contactIdx){
+    if(current === 0){
       const nome = (document.querySelector('input[name="nome"]').value||'').trim();
       const whatsapp = (document.querySelector('input[name="whatsapp"]').value||'').trim();
       const missing = !(nome && whatsapp);
-      if(footerNext) footerNext.disabled = missing;
       const inStepNext = active?.querySelector('[data-action="next"]');
       if(inStepNext) inStepNext.disabled = missing;
     }
@@ -274,12 +276,9 @@
   }
 
   function nextStep(){
-    const contactIdx = getContactIndex();
-    if(current < contactIdx){
-      setStep(current + 1);
-      return;
-    }
-    if(current === contactIdx){
+    const lastQuestionIdx = steps.findIndex(s=>s.querySelector('.options[data-question="Q5"]'));
+    // Passo 0: valida contato antes de seguir
+    if(current === 0){
       if(!validateContact()){
         const firstErr = document.querySelector('.form input.error');
         if(firstErr){
@@ -288,6 +287,16 @@
         }
         return;
       }
+      setStep(current + 1);
+      return;
+    }
+    // Avança perguntas até a última
+    if(current < lastQuestionIdx){
+      setStep(current + 1);
+      return;
+    }
+    // Última pergunta respondida -> calcula resultado
+    if(current === lastQuestionIdx){
       const score = computeScore();
       showResult(score);
     }
@@ -679,20 +688,14 @@
     const whatsEl = document.querySelector('input[name="whatsapp"]');
     const nome = (nomeEl?.value||'').trim();
     const whatsapp = (whatsEl?.value||'').trim();
-    const emailEl = document.querySelector('input[name="email"]');
-    const email = (emailEl?.value||'').trim();
-    // Limpa erros anteriores
-    [nomeEl, whatsEl, emailEl].forEach(el=>el?.classList.remove('error'));
+    [nomeEl, whatsEl].forEach(el=>el?.classList.remove('error'));
     document.querySelectorAll('.field-error').forEach(el=>el.textContent='');
-
     let ok = true;
     if(!nome){
       nomeEl?.classList.add('error');
       document.querySelector('[data-error-for="nome"]').textContent = 'Informe seu nome';
       ok = false;
     }
-
-    // Validação de WhatsApp: aceita apenas dígitos, entre 10 e 12 (ex.: 67 + 9 dígitos)
     const onlyDigits = whatsapp.replace(/\D+/g,'');
     const validWhats = /^\d{10,12}$/.test(onlyDigits);
     if(!validWhats){
@@ -700,15 +703,6 @@
       document.querySelector('[data-error-for="whatsapp"]').textContent = 'Informe um WhatsApp válido. Ex.: 67 99999-9999';
       ok = false;
     }
-
-    // Validação de e-mail simples (RFC-like)
-    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-    if(!validEmail){
-      emailEl?.classList.add('error');
-      document.querySelector('[data-error-for="email"]').textContent = 'Informe um e-mail válido. Ex.: escrita8@3ccontabilidade.com.br';
-      ok = false;
-    }
-
     return ok;
   }
 
@@ -723,7 +717,7 @@
     btn.addEventListener('click', prevStep);
   });
 
-  ['nome','whatsapp','email'].forEach(name=>{
+  ['nome','whatsapp'].forEach(name=>{
     const input = document.querySelector(`input[name="${name}"]`);
     if(!input) return;
     input.addEventListener('input', ()=>{
@@ -734,7 +728,7 @@
     });
   });
 
-  setStep(1);
+  setStep(0);
   setupAdmin();
   // Fallback se o vídeo local não carregar (ex.: arquivo ausente ou codec não suportado)
   (function setupVideoFallback(){
