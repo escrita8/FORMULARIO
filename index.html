@@ -25,7 +25,7 @@
       window.APP_VERSION = APP_VERSION;
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=2025-11-10-02" />
+  <link rel="stylesheet" href="styles.css?v=2025-11-10-04">
   <!-- Grid.js para tabelas bonitonas -->
   <link rel="stylesheet" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css">
   <script defer src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
@@ -88,6 +88,16 @@
           <button class="option" data-value="80" data-option-key="venda_servico">Venda e Serviço</button>
           <button class="option" data-value="55" data-option-key="rural">Rural</button>
         </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradRamo)" opacity="0.15"/>
+            <path d="M40 70 L60 50 L80 70 L60 50 L60 30" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="35" y="70" width="15" height="20" rx="2" fill="#42A5F5"/>
+            <rect x="53" y="70" width="14" height="20" rx="2" fill="#1E88E5"/>
+            <rect x="70" y="70" width="15" height="20" rx="2" fill="#64B5F6"/>
+            <defs><linearGradient id="gradRamo" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
+        </div>
       </section>
 
       <!-- Q2 -->
@@ -99,6 +109,18 @@
           <button class="option" data-value="70" data-option-key="30-50">Entre 30 e 50</button>
           <button class="option" data-value="80" data-option-key="50-80">Entre 50 e 80</button>
           <button class="option" data-value="100" data-option-key="80+">Acima de 80</button>
+        </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradFunc)" opacity="0.15"/>
+            <circle cx="45" cy="50" r="8" fill="#1E88E5"/>
+            <path d="M45 58 C45 58, 35 58, 35 68 L35 75 L55 75 L55 68 C55 58, 45 58, 45 58" fill="#42A5F5"/>
+            <circle cx="75" cy="50" r="8" fill="#1E88E5"/>
+            <path d="M75 58 C75 58, 65 58, 65 68 L65 75 L85 75 L85 68 C85 58, 75 58, 75 58" fill="#42A5F5"/>
+            <circle cx="60" cy="38" r="9" fill="#1565C0"/>
+            <path d="M60 47 C60 47, 48 47, 48 58 L48 68 L72 68 L72 58 C72 47, 60 47, 60 47" fill="#1E88E5"/>
+            <defs><linearGradient id="gradFunc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
         </div>
       </section>
 
@@ -112,16 +134,53 @@
           <button class="option" data-value="80" data-option-key="1m_2m">Entre R$ 1 milhão e R$ 2 milhões por ano</button>
           <button class="option" data-value="95" data-option-key="acima_2m">Acima de R$ 2 milhões por ano</button>
         </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradFat)" opacity="0.15"/>
+            <rect x="45" y="35" width="30" height="40" rx="3" fill="none" stroke="#1E88E5" stroke-width="3"/>
+            <path d="M60 45 Q55 50 60 55 Q65 50 60 45 M60 55 L60 65" stroke="#42A5F5" stroke-width="3" stroke-linecap="round"/>
+            <line x1="35" y1="80" x2="85" y2="80" stroke="#1E88E5" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="50" cy="85" r="3" fill="#42A5F5"/>
+            <circle cx="60" cy="85" r="3" fill="#1E88E5"/>
+            <circle cx="70" cy="85" r="3" fill="#64B5F6"/>
+            <defs><linearGradient id="gradFat" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
+        </div>
       </section>
 
       <!-- Q4 -->
       <section class="step" data-step="1">
         <h2>Q4 🧾 Qual é o regime de tributação atual da empresa?</h2>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradReg)" opacity="0.15"/>
+            <rect x="40" y="35" width="40" height="50" rx="2" fill="none" stroke="#1E88E5" stroke-width="3"/>
+            <line x1="48" y1="45" x2="72" y2="45" stroke="#42A5F5" stroke-width="2" stroke-linecap="round"/>
+            <line x1="48" y1="53" x2="68" y2="53" stroke="#42A5F5" stroke-width="2" stroke-linecap="round"/>
+            <line x1="48" y1="61" x2="72" y2="61" stroke="#42A5F5" stroke-width="2" stroke-linecap="round"/>
+            <line x1="48" y1="69" x2="64" y2="69" stroke="#42A5F5" stroke-width="2" stroke-linecap="round"/>
+            <rect x="48" y="75" width="8" height="6" fill="#1E88E5" rx="1"/>
+            <defs><linearGradient id="gradReg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
+        </div>
         <div class="options" data-question="Q1">
           <button class="option" data-value="10" data-option-key="mei">MEI</button>
-          <button class="option" data-value="40" data-option-key="simples">Simples Nacional</button>
-          <button class="option" data-value="80" data-option-key="lucro_presumido">Lucro Presumido</button>
+          <button class="option" data-value="60" data-option-key="simples">Simples Nacional</button>
+          <button class="option" data-value="70" data-option-key="lucro_presumido">Lucro Presumido</button>
           <button class="option" data-value="80" data-option-key="lucro_real">Lucro Real</button>
+        </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradReg)" opacity="0.15"/>
+            <rect x="40" y="35" width="40" height="50" rx="3" fill="none" stroke="#1E88E5" stroke-width="3"/>
+            <line x1="48" y1="45" x2="72" y2="45" stroke="#42A5F5" stroke-width="2" stroke-linecap="round"/>
+            <line x1="48" y1="53" x2="68" y2="53" stroke="#64B5F6" stroke-width="2" stroke-linecap="round"/>
+            <line x1="48" y1="61" x2="70" y2="61" stroke="#64B5F6" stroke-width="2" stroke-linecap="round"/>
+            <line x1="48" y1="69" x2="65" y2="69" stroke="#64B5F6" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="68" cy="73" r="8" fill="#1E88E5" opacity="0.2"/>
+            <text x="68" y="77" font-size="10" font-weight="bold" fill="#1565C0" text-anchor="middle">✓</text>
+            <defs><linearGradient id="gradReg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
         </div>
       </section>
 
@@ -135,17 +194,53 @@
           <button class="option" data-value="70" data-option-key="nao_sabe">Não tenho conhecimento</button>
           <button class="option" data-value="90" data-option-key="sem_nota">Não costumo pedir nota</button>
         </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradForn)" opacity="0.15"/>
+            <rect x="35" y="45" width="20" height="25" rx="2" fill="#42A5F5"/>
+            <rect x="35" y="40" width="20" height="5" fill="#1E88E5"/>
+            <rect x="65" y="45" width="20" height="25" rx="2" fill="#64B5F6"/>
+            <rect x="65" y="40" width="20" height="5" fill="#42A5F5"/>
+            <path d="M50 55 L60 45 L70 55" stroke="#1565C0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="60" y1="45" x2="60" y2="80" stroke="#1565C0" stroke-width="3" stroke-linecap="round"/>
+            <defs><linearGradient id="gradForn" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
+        </div>
       </section>
 
       <!-- Q6 -->
       <section class="step" data-step="3">
         <h2>Q6 👥 Qual é o perfil de clientes da sua empresa?</h2>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradCli)" opacity="0.15"/>
+            <circle cx="45" cy="50" r="10" fill="#1E88E5"/>
+            <path d="M45 60 C45 60, 33 60, 33 72 L33 80 L57 80 L57 72 C57 60, 45 60, 45 60" fill="#42A5F5"/>
+            <rect x="65" y="45" width="22" height="28" rx="2" fill="#64B5F6"/>
+            <rect x="65" y="40" width="22" height="5" fill="#42A5F5"/>
+            <circle cx="76" cy="55" r="4" fill="#1565C0"/>
+            <defs><linearGradient id="gradCli" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
+        </div>
         <div class="options" data-question="Q3">
           <button class="option" data-value="30" data-option-key="b2c">Maioria B2C (vende para consumidor final CPF)</button>
           <button class="option" data-value="80" data-option-key="misto">Misto (vendo para CNPJ e CPF)</button>
           <button class="option" data-value="100" data-option-key="b2b">Maioria B2B (vendo mais para empresas CNPJ)</button>
           <button class="option" data-value="30" data-option-key="export">Exportação</button>
           <button class="option" data-value="70" data-option-key="nao_sei">Não sei responder</button>
+        </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradCli)" opacity="0.15"/>
+            <circle cx="45" cy="52" r="10" fill="#42A5F5"/>
+            <path d="M45 64 C45 64, 35 64, 35 74 L35 80 L55 80 L55 74 C55 64, 45 64, 45 64 Z" fill="#42A5F5"/>
+            <rect x="68" y="48" width="20" height="28" rx="2" fill="#64B5F6"/>
+            <rect x="68" y="43" width="20" height="5" fill="#42A5F5"/>
+            <line x1="73" y1="55" x2="73" y2="65" stroke="#1565C0" stroke-width="2"/>
+            <line x1="78" y1="55" x2="78" y2="65" stroke="#1565C0" stroke-width="2"/>
+            <line x1="83" y1="55" x2="83" y2="65" stroke="#1565C0" stroke-width="2"/>
+            <defs><linearGradient id="gradCli" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
         </div>
       </section>
 
@@ -159,6 +254,17 @@
           <button class="option" data-value="10" data-option-key="domina">Domina 100%</button>
           <button class="option" data-value="80" data-option-key="nao_sabe">Não sei responder</button>
         </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradCad)" opacity="0.15"/>
+            <rect x="35" y="40" width="50" height="40" rx="3" fill="none" stroke="#1E88E5" stroke-width="3"/>
+            <path d="M45 55 L48 58 L55 50" stroke="#42A5F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="62" y1="52" x2="75" y2="52" stroke="#64B5F6" stroke-width="2" stroke-linecap="round"/>
+            <path d="M45 68 L48 71 L55 63" stroke="#42A5F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="62" y1="65" x2="75" y2="65" stroke="#64B5F6" stroke-width="2" stroke-linecap="round"/>
+            <defs><linearGradient id="gradCad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
+        </div>
       </section>
 
       <!-- Q8 -->
@@ -171,6 +277,20 @@
           <button class="option" data-option-key="sistema_contas">Tenho um sistema de contas a pagar e receber</button>
           <button class="option" data-option-key="relatorio_mensal">Tenho relatório mensal sobre entradas e saídas</button>
           <button class="option" data-option-key="financeiro_basico">Meu financeiro ainda é muito básico: misturo contas, não peço nota e não tenho relatórios</button>
+        </div>
+        <div class="question-illustration">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50" fill="url(#gradFin)" opacity="0.15"/>
+            <rect x="30" y="40" width="60" height="45" rx="4" fill="none" stroke="#1E88E5" stroke-width="3"/>
+            <rect x="35" y="47" width="20" height="15" fill="#42A5F5" opacity="0.3"/>
+            <rect x="35" y="65" width="15" height="15" fill="#64B5F6" opacity="0.3"/>
+            <path d="M50 55 L60 48 L70 52 L80 45" stroke="#1565C0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="50" cy="55" r="2.5" fill="#1E88E5"/>
+            <circle cx="60" cy="48" r="2.5" fill="#1E88E5"/>
+            <circle cx="70" cy="52" r="2.5" fill="#1E88E5"/>
+            <circle cx="80" cy="45" r="2.5" fill="#1E88E5"/>
+            <defs><linearGradient id="gradFin" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" /><stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" /></linearGradient></defs>
+          </svg>
         </div>
       </section>
 
@@ -323,6 +443,6 @@
     </footer>
   </div>
 
-  <script src="script.js?v=2025-11-10-02"></script>
+  <script src="script.js?v=2025-11-10-04"></script>
 </body>
 </html>
