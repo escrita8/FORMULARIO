@@ -531,10 +531,9 @@
       utm_campaign: params.get('utm_campaign')||''
     };
     const contact = {
-      nome: (document.querySelector('input[name="nome"]').value||'').trim(),
-      empresa: (document.querySelector('input[name="empresa"]').value||'').trim(),
-      whatsapp: (document.querySelector('input[name="whatsapp"]').value||'').trim(),
-      email: (document.querySelector('input[name="email"]').value||'').trim()
+      nome: (document.querySelector('input[name="nome"]')?.value||'').trim(),
+      empresa: (document.querySelector('input[name="empresa"]')?.value||'').trim(),
+      whatsapp: (document.querySelector('input[name="whatsapp"]')?.value||'').trim()
     };
     const payload = {
       ts: new Date().toISOString(),
@@ -585,7 +584,7 @@
       'R1','R2','R3','Q1','Q2','Q3','Q4','Q5',
       // Labels legíveis para Q2, Q3, Q4 e Q7 (pedido do cliente)
       'Q2_resposta','Q3_resposta','Q4_resposta','Q7_resposta',
-      'nome','empresa','whatsapp','email','utm_source','utm_medium','utm_campaign'
+      'nome','empresa','whatsapp','utm_source','utm_medium','utm_campaign'
     ];
     const esc = v => '"'+String(v??'').replace(/"/g,'""')+'"';
     const rows = items.map(item => [
@@ -615,7 +614,6 @@
       item.contact.nome,
       item.contact.empresa,
       item.contact.whatsapp,
-      item.contact.email,
       item.utm.utm_source,
       item.utm.utm_medium,
       item.utm.utm_campaign
